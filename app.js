@@ -36,8 +36,10 @@ async function boot() {
     textSp: 22,
     textColor: TEXT_COLORS[0],
     layout: "landscape",
+    layoutLocked: false,
   };
   if (!prefs.layout) prefs.layout = "landscape";
+  if (typeof prefs.layoutLocked !== "boolean") prefs.layoutLocked = false;
   favorites = (await getKv("favorites")) || [];
   renderHome();
   startTick();
@@ -329,8 +331,7 @@ async function openBoard(zoneId, index, practice) {
       <div class="board-top">
         <button id="btn-back">返回</button>
         <div class="board-title" id="board-title"></div>
-        <button class="orient-btn" id="btn-portrait">直向</button>
-        <button class="orient-btn" id="btn-landscape">橫向</button>
+        <button class="orient-btn" id="btn-lock-view">固定畫面</button>
         <span class="tool-label">字</span>
         <input class="seek" type="range" id="text-size" min="0" max="28" />
         <span id="text-colors"></span>
@@ -424,15 +425,24 @@ async function openBoard(zoneId, index, practice) {
     for (const d of draws) d.board.resize();
   }
 
+  function detectLayout() {
+    return window.innerWidth >= window.innerHeight ? "landscape" : "portrait";
+  }
+
   function applyLayout() {
     const board = document.getElementById("board");
+    if (!prefs.layoutLocked) {
+      prefs.layout = detectLayout();
+    }
     const layout = prefs.layout === "portrait" ? "portrait" : "landscape";
     board.classList.toggle("layout-portrait", layout === "portrait");
     board.classList.toggle("layout-landscape", layout === "landscape");
+    // Phone upright but locked/using landscape: rotate UI to wide side.
     const needsRotate = layout === "landscape" && window.innerHeight > window.innerWidth;
     board.classList.toggle("needs-rotate", needsRotate);
-    document.getElementById("btn-portrait").classList.toggle("selected", layout === "portrait");
-    document.getElementById("btn-landscape").classList.toggle("selected", layout === "landscape");
+    const lockBtn = document.getElementById("btn-lock-view");
+    lockBtn.classList.toggle("selected", !!prefs.layoutLocked);
+    lockBtn.textContent = prefs.layoutLocked ? "已固定" : "固定畫面";
     requestAnimationFrame(() => {
       resizeAll();
       requestAnimationFrame(resizeAll);
@@ -511,15 +521,17 @@ async function openBoard(zoneId, index, practice) {
 
   document.getElementById("btn-back").onclick = () => {
     window.removeEventListener("resize", onWinResize);
+    window.removeEventListener("orientationchange", onWinResize);
     renderZone(zoneId, practice);
   };
-  document.getElementById("btn-portrait").onclick = async () => {
-    prefs.layout = "portrait";
-    await savePrefs();
-    applyLayout();
-  };
-  document.getElementById("btn-landscape").onclick = async () => {
-    prefs.layout = "landscape";
+  document.getElementById("btn-lock-view").onclick = async () => {
+    if (prefs.layoutLocked) {
+      prefs.layoutLocked = false;
+      prefs.layout = detectLayout();
+    } else {
+      prefs.layout = detectLayout();
+      prefs.layoutLocked = true;
+    }
     await savePrefs();
     applyLayout();
   };
@@ -649,6 +661,7 @@ async function openBoard(zoneId, index, practice) {
 
   const onWinResize = () => applyLayout();
   window.addEventListener("resize", onWinResize);
+  window.addEventListener("orientationchange", onWinResize);
   boardState = { resizeAll, applyLayout };
   applyLayout();
   await show();
