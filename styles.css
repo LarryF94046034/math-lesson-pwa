@@ -68,10 +68,27 @@ input, textarea { font: inherit; }
 .board {
   position: fixed;
   inset: 0;
-  display: flex;
-  flex-direction: column;
   background: #eceff1;
   z-index: 20;
+  overflow: hidden;
+}
+.board-rotator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: #eceff1;
+}
+/* Phone held upright but user chose landscape: rotate UI to use the wide side */
+.board.layout-landscape.needs-rotate .board-rotator {
+  width: 100dvh;
+  height: 100dvw;
+  top: 50%;
+  left: 50%;
+  inset: auto;
+  transform: translate(-50%, -50%) rotate(90deg);
+  transform-origin: center center;
 }
 .board-top, .board-tools {
   display: flex;
@@ -82,10 +99,11 @@ input, textarea { font: inherit; }
   background: #f7f9fb;
   flex-wrap: nowrap;
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 .board-top { background: #fff; border-bottom: 1px solid var(--line); }
-.board-title { flex: 1; font-weight: 700; font-size: 13px; color: var(--ink-dark); min-width: 120px; }
-.board-status { font-size: 12px; color: var(--muted); padding: 0 8px 4px; }
+.board-title { flex: 1; font-weight: 700; font-size: 13px; color: var(--ink-dark); min-width: 80px; }
+.board-status { font-size: 12px; color: var(--muted); padding: 0 8px 4px; flex: 0 0 auto; }
 .board-main {
   flex: 1;
   display: flex;
@@ -93,11 +111,29 @@ input, textarea { font: inherit; }
   padding: 4px;
   gap: 4px;
 }
+.board.layout-portrait .board-main {
+  flex-direction: column;
+}
+.board.layout-landscape .board-main {
+  flex-direction: row;
+}
+.board.layout-portrait .left-pane,
+.board.layout-portrait .boards {
+  flex: 1 1 45%;
+}
+.board.layout-landscape .left-pane {
+  flex: 1 1 34%;
+  max-width: 40%;
+}
+.board.layout-landscape .boards {
+  flex: 2 1 66%;
+}
 .left-pane {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
   gap: 4px;
 }
 .zoom-box, .text-box {
@@ -181,8 +217,4 @@ input, textarea { font: inherit; }
 }
 .tool-label { font-size: 13px; color: var(--ink-dark); }
 .seek { width: 110px; }
-
-@media (max-width: 700px) and (orientation: portrait) {
-  .board-main { flex-direction: column; }
-  .left-pane, .boards { flex: 1 1 45%; }
-}
+.orient-btn.selected { background: var(--ink); color: #fff; }

@@ -35,7 +35,9 @@ async function boot() {
     color: COLORS[0],
     textSp: 22,
     textColor: TEXT_COLORS[0],
+    layout: "landscape",
   };
+  if (!prefs.layout) prefs.layout = "landscape";
   favorites = (await getKv("favorites")) || [];
   renderHome();
   startTick();
@@ -322,41 +324,45 @@ async function openBoard(zoneId, index, practice) {
   ensureInk(inkDoc);
 
   app.innerHTML = `
-  <div class="board" id="board">
-    <div class="board-top">
-      <button id="btn-back">返回</button>
-      <div class="board-title" id="board-title"></div>
-      <span class="tool-label">字</span>
-      <input class="seek" type="range" id="text-size" min="0" max="28" />
-      <span id="text-colors"></span>
-      <button id="btn-fav">收藏</button>
-      <button id="btn-solution" style="display:none">解答</button>
-      <button id="btn-prev">上一題</button>
-      <button id="btn-next">下一題</button>
-    </div>
-    <div class="board-tools">
-      <button id="btn-draw">繪圖</button>
-      <button id="btn-undo">重製</button>
-      <button id="btn-eraser">橡皮擦</button>
-      <span class="tool-label">筆粗</span>
-      <input class="seek" type="range" id="pen-size" min="0" max="40" />
-      <span id="pen-label"></span>
-      <span class="tool-label">橡皮</span>
-      <input class="seek" type="range" id="eraser-size" min="0" max="80" />
-      <span id="eraser-label"></span>
-      <span id="pen-colors"></span>
-    </div>
-    <div class="board-status" id="board-status"></div>
-    <div class="board-main">
-      <div class="left-pane">
-        <div class="zoom-box"><canvas id="zoom"></canvas></div>
-        <div class="text-box" id="qtext"></div>
+  <div class="board layout-landscape" id="board">
+    <div class="board-rotator" id="board-rotator">
+      <div class="board-top">
+        <button id="btn-back">返回</button>
+        <div class="board-title" id="board-title"></div>
+        <button class="orient-btn" id="btn-portrait">直向</button>
+        <button class="orient-btn" id="btn-landscape">橫向</button>
+        <span class="tool-label">字</span>
+        <input class="seek" type="range" id="text-size" min="0" max="28" />
+        <span id="text-colors"></span>
+        <button id="btn-fav">收藏</button>
+        <button id="btn-solution" style="display:none">解答</button>
+        <button id="btn-prev">上一題</button>
+        <button id="btn-next">下一題</button>
       </div>
-      <div class="boards" id="boards"></div>
-    </div>
-    <div class="answer-card" id="answer-card" style="display:none">
-      <div class="handle" id="answer-handle">答案區　按住這裡拖動</div>
-      <textarea id="answer-input" placeholder="輸入這題的答案"></textarea>
+      <div class="board-tools">
+        <button id="btn-draw">繪圖</button>
+        <button id="btn-undo">重製</button>
+        <button id="btn-eraser">橡皮擦</button>
+        <span class="tool-label">筆粗</span>
+        <input class="seek" type="range" id="pen-size" min="0" max="40" />
+        <span id="pen-label"></span>
+        <span class="tool-label">橡皮</span>
+        <input class="seek" type="range" id="eraser-size" min="0" max="80" />
+        <span id="eraser-label"></span>
+        <span id="pen-colors"></span>
+      </div>
+      <div class="board-status" id="board-status"></div>
+      <div class="board-main">
+        <div class="left-pane">
+          <div class="zoom-box"><canvas id="zoom"></canvas></div>
+          <div class="text-box" id="qtext"></div>
+        </div>
+        <div class="boards" id="boards"></div>
+      </div>
+      <div class="answer-card" id="answer-card" style="display:none">
+        <div class="handle" id="answer-handle">答案區　按住這裡拖動</div>
+        <textarea id="answer-input" placeholder="輸入這題的答案"></textarea>
+      </div>
     </div>
   </div>`;
 
@@ -416,6 +422,21 @@ async function openBoard(zoneId, index, practice) {
   function resizeAll() {
     zoom.resize();
     for (const d of draws) d.board.resize();
+  }
+
+  function applyLayout() {
+    const board = document.getElementById("board");
+    const layout = prefs.layout === "portrait" ? "portrait" : "landscape";
+    board.classList.toggle("layout-portrait", layout === "portrait");
+    board.classList.toggle("layout-landscape", layout === "landscape");
+    const needsRotate = layout === "landscape" && window.innerHeight > window.innerWidth;
+    board.classList.toggle("needs-rotate", needsRotate);
+    document.getElementById("btn-portrait").classList.toggle("selected", layout === "portrait");
+    document.getElementById("btn-landscape").classList.toggle("selected", layout === "landscape");
+    requestAnimationFrame(() => {
+      resizeAll();
+      requestAnimationFrame(resizeAll);
+    });
   }
 
   function updateStatus() {
@@ -488,7 +509,20 @@ async function openBoard(zoneId, index, practice) {
     }
   }
 
-  document.getElementById("btn-back").onclick = () => renderZone(zoneId, practice);
+  document.getElementById("btn-back").onclick = () => {
+    window.removeEventListener("resize", onWinResize);
+    renderZone(zoneId, practice);
+  };
+  document.getElementById("btn-portrait").onclick = async () => {
+    prefs.layout = "portrait";
+    await savePrefs();
+    applyLayout();
+  };
+  document.getElementById("btn-landscape").onclick = async () => {
+    prefs.layout = "landscape";
+    await savePrefs();
+    applyLayout();
+  };
   document.getElementById("btn-prev").onclick = async () => {
     if (index > 0) {
       index--;
@@ -613,8 +647,10 @@ async function openBoard(zoneId, index, practice) {
     await setKv("attemptY:" + qs[index].id, card.offsetTop / window.innerHeight);
   });
 
-  window.addEventListener("resize", resizeAll, { once: false });
-  boardState = { resizeAll };
+  const onWinResize = () => applyLayout();
+  window.addEventListener("resize", onWinResize);
+  boardState = { resizeAll, applyLayout };
+  applyLayout();
   await show();
 }
 
