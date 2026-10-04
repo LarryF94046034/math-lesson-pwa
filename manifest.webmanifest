@@ -1,0 +1,26 @@
+{
+  "name": "數學90分教案",
+  "short_name": "數學教案",
+  "description": "國中數學1上 90分鐘教案與作答（本機存檔、可離線）",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F3F6FA",
+  "theme_color": "#12344C",
+  "lang": "zh-Hant",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

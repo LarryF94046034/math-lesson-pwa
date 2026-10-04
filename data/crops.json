@@ -1,0 +1,920 @@
+[
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.125,
+    "bottom": 0.195,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_1.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.19,
+    "bottom": 0.245,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_2.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.24,
+    "bottom": 0.288,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_3.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.283,
+    "bottom": 0.335,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_4.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.33,
+    "bottom": 0.385,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_5.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.38,
+    "bottom": 0.43,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_6.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.42,
+    "bottom": 0.485,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_7.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.475,
+    "bottom": 0.535,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_8.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.525,
+    "bottom": 0.585,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_9.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.575,
+    "bottom": 0.655,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-選擇_10.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.665,
+    "bottom": 0.735,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-填充_1.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.725,
+    "bottom": 0.765,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-填充_2.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.755,
+    "bottom": 0.795,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-填充_3.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.785,
+    "bottom": 0.875,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-填充_4.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.865,
+    "bottom": 0.905,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-填充_5.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.895,
+    "bottom": 0.93,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-填充_6.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 1,
+    "top": 0.92,
+    "bottom": 0.97,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p1-填充_7.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 2,
+    "top": 0.035,
+    "bottom": 0.235,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p2-計算_1.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 2,
+    "top": 0.225,
+    "bottom": 0.42,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p2-計算_2.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 2,
+    "top": 0.41,
+    "bottom": 0.605,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p2-計算_3.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 2,
+    "top": 0.595,
+    "bottom": 0.775,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p2-計算_4.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 2,
+    "top": 0.765,
+    "bottom": 0.945,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p2-計算_5.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.12,
+    "bottom": 0.195,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_1.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.185,
+    "bottom": 0.245,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_2.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.235,
+    "bottom": 0.315,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_3.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.305,
+    "bottom": 0.355,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_4.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.345,
+    "bottom": 0.405,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_5.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.395,
+    "bottom": 0.455,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_6.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.445,
+    "bottom": 0.495,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_7.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.485,
+    "bottom": 0.535,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_8.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.525,
+    "bottom": 0.645,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_9.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.635,
+    "bottom": 0.705,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-選擇_10.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.72,
+    "bottom": 0.765,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-填充_1.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.755,
+    "bottom": 0.805,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-填充_2.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.795,
+    "bottom": 0.835,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-填充_3.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.825,
+    "bottom": 0.865,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-填充_4.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 3,
+    "top": 0.855,
+    "bottom": 0.98,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p3-填充_5.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 4,
+    "top": 0.03,
+    "bottom": 0.245,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p4-計算_1.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 4,
+    "top": 0.235,
+    "bottom": 0.44,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p4-計算_2.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 4,
+    "top": 0.43,
+    "bottom": 0.65,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p4-計算_3.jpg"
+  },
+  {
+    "pdf": "exam.pdf",
+    "page": 4,
+    "top": 0.64,
+    "bottom": 0.91,
+    "left": 0.0,
+    "right": 1.0,
+    "out": "crops/exam-p4-計算_4.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.115,
+    "bottom": 0.285,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p9-選擇_1.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.275,
+    "bottom": 0.385,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p9-選擇_2.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.375,
+    "bottom": 0.485,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p9-選擇_3.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.475,
+    "bottom": 0.575,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p9-選擇_4.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.565,
+    "bottom": 0.775,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p9-選擇_5.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.765,
+    "bottom": 0.985,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p9-選擇_6.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.115,
+    "bottom": 0.225,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-選擇_7.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.215,
+    "bottom": 0.325,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-選擇_8.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.315,
+    "bottom": 0.405,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-選擇_9.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.395,
+    "bottom": 0.505,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-選擇_10.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.505,
+    "bottom": 0.665,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-填充_1.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.655,
+    "bottom": 0.725,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-填充_2.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.715,
+    "bottom": 0.785,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-填充_3.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.775,
+    "bottom": 0.845,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-填充_4.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.835,
+    "bottom": 0.905,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-填充_5.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.895,
+    "bottom": 0.94,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-填充_6.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 9,
+    "top": 0.93,
+    "bottom": 0.985,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p9-填充_7.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 10,
+    "top": 0.055,
+    "bottom": 0.365,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p10-計算_1.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 10,
+    "top": 0.355,
+    "bottom": 0.64,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p10-計算_2.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 10,
+    "top": 0.63,
+    "bottom": 0.96,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/adv-p10-計算_3.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 10,
+    "top": 0.055,
+    "bottom": 0.365,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p10-計算_4.jpg"
+  },
+  {
+    "pdf": "adv.pdf",
+    "page": 10,
+    "top": 0.355,
+    "bottom": 0.8,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/adv-p10-計算_5.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.115,
+    "bottom": 0.265,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_1.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.255,
+    "bottom": 0.335,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_2.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.325,
+    "bottom": 0.425,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_3.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.415,
+    "bottom": 0.535,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_4.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.525,
+    "bottom": 0.605,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_5.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.595,
+    "bottom": 0.675,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_6.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.665,
+    "bottom": 0.765,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_7.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.755,
+    "bottom": 0.845,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-選擇_8.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.835,
+    "bottom": 0.99,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/basic-p5-填充_1.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.115,
+    "bottom": 0.27,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-填充_2.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.26,
+    "bottom": 0.32,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-填充_3.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.31,
+    "bottom": 0.37,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-填充_4.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.36,
+    "bottom": 0.425,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-填充_5.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.415,
+    "bottom": 0.485,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-填充_6.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.485,
+    "bottom": 0.585,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-計算_1.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.575,
+    "bottom": 0.865,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-計算_2.jpg"
+  },
+  {
+    "pdf": "basic.pdf",
+    "page": 5,
+    "top": 0.85,
+    "bottom": 0.99,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/basic-p5-計算_3.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.125,
+    "bottom": 0.255,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p9-選擇_1.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.245,
+    "bottom": 0.335,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p9-選擇_2.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.325,
+    "bottom": 0.445,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p9-選擇_3.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.435,
+    "bottom": 0.565,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p9-選擇_4.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.555,
+    "bottom": 0.685,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p9-選擇_5.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.675,
+    "bottom": 0.855,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p9-選擇_6.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.845,
+    "bottom": 0.985,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p9-選擇_7.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.115,
+    "bottom": 0.275,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/bvol-p9-選擇_8.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.265,
+    "bottom": 0.425,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/bvol-p9-選擇_9.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.415,
+    "bottom": 0.535,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/bvol-p9-選擇_10.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.525,
+    "bottom": 0.735,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/bvol-p9-選擇_11.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 9,
+    "top": 0.725,
+    "bottom": 0.985,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/bvol-p9-選擇_12.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.055,
+    "bottom": 0.115,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-填充_1.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.105,
+    "bottom": 0.17,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-填充_2.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.16,
+    "bottom": 0.225,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-填充_3.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.215,
+    "bottom": 0.285,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-填充_4.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.275,
+    "bottom": 0.355,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-填充_5.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.345,
+    "bottom": 0.405,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-填充_6.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.4,
+    "bottom": 0.69,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-綜合_1.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.68,
+    "bottom": 0.97,
+    "left": 0.0,
+    "right": 0.51,
+    "out": "crops/bvol-p10-綜合_2.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.04,
+    "bottom": 0.545,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/bvol-p10-綜合_3.jpg"
+  },
+  {
+    "pdf": "bvol.pdf",
+    "page": 10,
+    "top": 0.535,
+    "bottom": 0.97,
+    "left": 0.49,
+    "right": 1.0,
+    "out": "crops/bvol-p10-綜合_4.jpg"
+  }
+]
