@@ -55,10 +55,32 @@ async function boot() {
     color: COLORS[0],
     textSp: 22,
     textColor: TEXT_COLORS[0],
+    animPointMs: 8,
+    animStrokeMs: 300,
   };
+  if (prefs.animPointMs == null) prefs.animPointMs = 8;
+  if (prefs.animStrokeMs == null) prefs.animStrokeMs = 300;
   favorites = (await getKv("favorites")) || [];
   initCloud();
   renderHome();
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/** Rebuild global stroke sequence from inkDoc.order + per-zone arrays. */
+function collectOrderedStrokes(doc) {
+  const cursors = { main: 0, A: 0, B: 0, C: 0, D: 0 };
+  const list = [];
+  for (const zone of doc.order || []) {
+    const arr = doc.zones?.[zone] || [];
+    const i = cursors[zone] || 0;
+    if (i >= arr.length) continue;
+    list.push({ zone, stroke: arr[i] });
+    cursors[zone] = i + 1;
+  }
+  return list;
 }
 
 async function savePrefs() {
@@ -96,7 +118,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v15　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v16　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
@@ -364,9 +386,9 @@ async function openBoard(zoneId, index, practice, mentor = false) {
         <button id="btn-prev">上一題</button>
         <button id="btn-next">下一題</button>
       </div>
-      <div class="board-tools" id="board-tools" ${readOnly ? 'style="display:none"' : ""}>
+      <div class="board-tools" id="board-tools-edit" ${readOnly ? 'style="display:none"' : ""}>
         <button id="btn-draw">繪圖</button>
-        <button id="btn-clear">清除本題</button>
+        <button id="btn-clear">清空</button>
         <button id="btn-eraser">橡皮擦</button>
         <span class="tool-label">筆粗</span>
         <input class="seek" type="range" id="pen-size" min="0" max="40" />
@@ -375,6 +397,16 @@ async function openBoard(zoneId, index, practice, mentor = false) {
         <input class="seek" type="range" id="eraser-size" min="0" max="80" />
         <span id="eraser-label"></span>
         <span id="pen-colors"></span>
+      </div>
+      <div class="board-tools" id="board-tools-anim">
+        <button id="btn-anim">動畫</button>
+        <button id="btn-anim-stop" disabled>停止</button>
+        <span class="tool-label">點間隔</span>
+        <input class="anim-num" type="number" id="anim-point-ms" min="1" max="200" step="1" />
+        <span class="tool-label">ms</span>
+        <span class="tool-label">筆間隔</span>
+        <input class="anim-num" type="number" id="anim-stroke-ms" min="0" max="5000" step="50" />
+        <span class="tool-label">ms</span>
       </div>
       <div class="board-status" id="board-status"></div>
       <div class="board-main">
@@ -397,6 +429,95 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   let tool = "none";
   let marked = inkDoc.order.length ? inkDoc.order[inkDoc.order.length - 1] : "";
   let publishBusy = false;
+  let animPlaying = false;
+  let animAbort = false;
+  let animRestoreOnAbort = true;
+
+  function setBoardsLocked(locked) {
+    for (const d of draws) d.board.setInputLocked(locked);
+  }
+
+  function updateAnimButtons() {
+    const play = document.getElementById("btn-anim");
+    const stop = document.getElementById("btn-anim-stop");
+    if (play) play.disabled = animPlaying;
+    if (stop) stop.disabled = !animPlaying;
+  }
+
+  async function stopAnimation(restoreFull = true) {
+    if (!animPlaying) return;
+    animRestoreOnAbort = restoreFull;
+    animAbort = true;
+    while (animPlaying) await sleep(20);
+  }
+
+  async function playAnimation() {
+    if (animPlaying) return;
+    const sequence = collectOrderedStrokes(inkDoc);
+    if (!sequence.length) {
+      alert("這一題還沒有筆跡可播");
+      return;
+    }
+    const pointMs = Math.max(1, Math.min(200, +prefs.animPointMs || 8));
+    const strokeMs = Math.max(0, Math.min(5000, +prefs.animStrokeMs || 300));
+    prefs.animPointMs = pointMs;
+    prefs.animStrokeMs = strokeMs;
+    await savePrefs();
+
+    animPlaying = true;
+    animAbort = false;
+    animRestoreOnAbort = true;
+    setBoardsLocked(true);
+    if (!readOnly) setTool("none");
+    updateAnimButtons();
+
+    const accumulated = { main: [], A: [], B: [], C: [], D: [] };
+    for (const d of draws) d.board.setStrokes([]);
+
+    try {
+      for (const { zone, stroke } of sequence) {
+        if (animAbort) break;
+        const board = draws.find((d) => d.zone === zone)?.board;
+        if (!board || !stroke) continue;
+        const pts = stroke.points || [];
+        if (!pts.length) {
+          accumulated[zone].push(stroke);
+          board.setStrokes(accumulated[zone].slice());
+          continue;
+        }
+        for (let i = 1; i <= pts.length; i++) {
+          if (animAbort) break;
+          const partial = {
+            eraser: !!stroke.eraser,
+            widthFraction: stroke.widthFraction,
+            color: stroke.color,
+            points: pts.slice(0, i),
+          };
+          board.setStrokes([...accumulated[zone], partial]);
+          await sleep(pointMs);
+        }
+        if (animAbort) break;
+        accumulated[zone].push({
+          eraser: !!stroke.eraser,
+          widthFraction: stroke.widthFraction,
+          color: stroke.color,
+          points: pts.slice(),
+        });
+        board.setStrokes(accumulated[zone].slice());
+        if (strokeMs > 0) await sleep(strokeMs);
+      }
+
+      if (animAbort && animRestoreOnAbort) {
+        for (const d of draws) d.board.setStrokes(inkDoc.zones[d.zone] || []);
+      }
+    } finally {
+      animPlaying = false;
+      animAbort = false;
+      setBoardsLocked(false);
+      updateAnimButtons();
+      updateStatus();
+    }
+  }
 
   async function publishCurrent(reason = "") {
     if (!mentor || !mentorEdit) return;
@@ -532,6 +653,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   }
 
   async function show() {
+    if (animPlaying) await stopAnimation(false);
     const q = qs[index];
     inkDoc = await loadInkForBoard(q.id, practice, mentor, mentorEdit);
     ensureInk(inkDoc);
@@ -597,6 +719,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   }
 
   document.getElementById("btn-back").onclick = async () => {
+    if (animPlaying) await stopAnimation(false);
     await publishCurrent("back");
     window.removeEventListener("resize", onWinResize);
     window.removeEventListener("orientationchange", onWinResize);
@@ -604,11 +727,13 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   };
   document.getElementById("btn-prev").onclick = async () => {
     if (index <= 0) return;
+    if (animPlaying) await stopAnimation(false);
     await publishCurrent("prev");
     index--;
     await show();
   };
   document.getElementById("btn-next").onclick = async () => {
+    if (animPlaying) await stopAnimation(false);
     if (index + 1 >= qs.length) {
       await publishCurrent("next-end");
       return;
@@ -630,11 +755,42 @@ async function openBoard(zoneId, index, practice, mentor = false) {
     refreshText();
     await loadImage(qs[index]);
   };
+  document.getElementById("btn-anim").onclick = () => playAnimation();
+  document.getElementById("btn-anim-stop").onclick = () => stopAnimation(true);
+  const animPointInput = document.getElementById("anim-point-ms");
+  const animStrokeInput = document.getElementById("anim-stroke-ms");
+  animPointInput.value = String(prefs.animPointMs ?? 8);
+  animStrokeInput.value = String(prefs.animStrokeMs ?? 300);
+  animPointInput.onchange = async () => {
+    prefs.animPointMs = Math.max(1, Math.min(200, +animPointInput.value || 8));
+    animPointInput.value = String(prefs.animPointMs);
+    await savePrefs();
+  };
+  animStrokeInput.onchange = async () => {
+    prefs.animStrokeMs = Math.max(0, Math.min(5000, +animStrokeInput.value || 300));
+    animStrokeInput.value = String(prefs.animStrokeMs);
+    await savePrefs();
+  };
+  updateAnimButtons();
+
   if (!readOnly) {
-    document.getElementById("btn-draw").onclick = () => setTool(tool === "pen" ? "none" : "pen");
-    document.getElementById("btn-eraser").onclick = () => setTool(tool === "eraser" ? "none" : "eraser");
+    document.getElementById("btn-draw").onclick = () => {
+      if (animPlaying) return;
+      setTool(tool === "pen" ? "none" : "pen");
+    };
+    document.getElementById("btn-eraser").onclick = () => {
+      if (animPlaying) return;
+      setTool(tool === "eraser" ? "none" : "eraser");
+    };
     document.getElementById("btn-clear").onclick = async () => {
-      if (!confirm("清除這一題的全部筆跡？")) return;
+      if (animPlaying) await stopAnimation(false);
+      if (
+        !confirm(
+          "確定清空這一題？\n將刪除全部繪製與橡皮擦紀錄，作答區回到最初空白，動畫也無法再播這一題的舊筆跡。"
+        )
+      ) {
+        return;
+      }
       inkDoc = { zones: {}, order: [] };
       ensureInk(inkDoc);
       marked = "";

@@ -91,6 +91,7 @@ export class DrawBoard {
     this.penPx = 6;
     this.eraserPx = 28;
     this.color = "#c62828";
+    this.inputLocked = false;
     this._bind();
     this.resize();
   }
@@ -110,6 +111,11 @@ export class DrawBoard {
   setTool(tool) {
     this.tool = tool;
     this.active = null;
+  }
+
+  setInputLocked(locked) {
+    this.inputLocked = !!locked;
+    if (locked) this.active = null;
   }
 
   setStyle({ penPx, eraserPx, color }) {
@@ -149,7 +155,7 @@ export class DrawBoard {
   }
 
   _down(e) {
-    if (this.tool === "none") return;
+    if (this.inputLocked || this.tool === "none") return;
     e.preventDefault();
     e.stopPropagation();
     try {
@@ -169,7 +175,7 @@ export class DrawBoard {
   }
 
   _move(e) {
-    if (!this.active) return;
+    if (this.inputLocked || !this.active) return;
     e.preventDefault();
     this.active.points.push(this._pos(e));
     this.paint();

@@ -231,4 +231,11 @@ input, textarea { font: inherit; }
 }
 .tool-label { font-size: 13px; color: var(--ink-dark); }
 .seek { width: 110px; }
+.anim-num {
+  width: 64px;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
 .orient-btn.selected { background: var(--ink); color: #fff; }
