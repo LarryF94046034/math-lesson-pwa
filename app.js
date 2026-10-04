@@ -2,7 +2,6 @@ import { getKv, setKv, inkKey } from "./db.js";
 import { DrawBoard, ZoomImage } from "./draw.js";
 
 const ASSET_BASE = new URL("./", import.meta.url);
-const TOTAL_MS = 90 * 60 * 1000;
 
 function asset(path) {
   return new URL(path.replace(/^\.\//, ""), ASSET_BASE).href;
@@ -12,23 +11,14 @@ const TEXT_COLORS = ["#212121", "#1565c0", "#c62828", "#2e7d32"];
 
 const app = document.getElementById("app");
 let data = null;
-let lesson = null;
 let prefs = null;
 let favorites = [];
-let tickTimer = null;
 let boardState = null;
 
 async function boot() {
   const res = await fetch(asset("data/questions.json"));
   if (!res.ok) throw new Error("questions.json " + res.status);
   data = await res.json();
-  lesson = (await getKv("lesson")) || {
-    remainingMs: TOTAL_MS,
-    running: false,
-    anchorAt: 0,
-    done: Array(7).fill(false),
-    notes: Array(7).fill(""),
-  };
   prefs = (await getKv("prefs")) || {
     penPx: 6,
     eraserPx: 28,
@@ -40,53 +30,10 @@ async function boot() {
   if (prefs.layout !== "landscape" && prefs.layout !== "portrait") prefs.layout = "portrait";
   favorites = (await getKv("favorites")) || [];
   renderHome();
-  startTick();
-}
-
-function remaining() {
-  if (!lesson.running) return lesson.remainingMs;
-  return Math.max(0, lesson.remainingMs - (Date.now() - lesson.anchorAt));
-}
-
-function clock(ms) {
-  const t = Math.floor(ms / 1000);
-  const m = Math.floor(t / 60);
-  const s = t % 60;
-  return `${m}:${String(s).padStart(2, "0")}`;
-}
-
-async function saveLesson() {
-  if (lesson.running) {
-    lesson.remainingMs = remaining();
-    lesson.anchorAt = Date.now();
-  }
-  await setKv("lesson", lesson);
 }
 
 async function savePrefs() {
   await setKv("prefs", prefs);
-}
-
-function startTick() {
-  clearInterval(tickTimer);
-  tickTimer = setInterval(() => {
-    if (!app.querySelector("#home-timer")) return;
-    if (lesson.running && remaining() <= 0) {
-      lesson.running = false;
-      lesson.remainingMs = 0;
-      saveLesson();
-    }
-    const el = document.getElementById("home-timer");
-    if (el) el.textContent = clock(remaining());
-    const pace = document.getElementById("home-pace");
-    if (pace) pace.textContent = paceText();
-  }, 500);
-}
-
-function paceText() {
-  if (!lesson.running && remaining() === TOTAL_MS) return "建議先從講義四區開始，再按開始上課";
-  if (remaining() <= 0) return "時間到。段落勾選與畫記仍留在這支手機";
-  return "上課中，可同時使用講義／作答四區";
 }
 
 function questionsOf(zone) {
@@ -95,11 +42,10 @@ function questionsOf(zone) {
 
 function renderHome() {
   boardState = null;
-  const doneCount = (lesson.done || []).filter(Boolean).length;
   app.innerHTML = `
   <div class="screen">
     <div class="muted">國中數學 1 上　教用　網頁版／PWA</div>
-    <div class="h1">90 分鐘教案</div>
+    <div class="h1">數學教案</div>
     <div class="muted">範圍 1-1～1-4　資料存在這支手機的瀏覽器（IndexedDB）</div>
 
     <div class="h2">四區題目　講義</div>
@@ -108,18 +54,11 @@ function renderHome() {
     <div class="h2">四區作答　答案先遮住</div>
     <div class="row" id="zones-practice"></div>
 
-    <div class="timer" id="home-timer">${clock(remaining())}</div>
-    <div class="muted" style="text-align:center" id="home-pace">${paceText()}</div>
-    <div class="row" style="margin-top:8px">
-      <button class="primary" id="btn-toggle">${lesson.running ? "暫停" : "開始上課"}</button>
-      <button id="btn-reset">計時歸零</button>
-    </div>
-
     <div class="h2">收藏的題目</div>
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：第一次連線開啟後，之後無網路也可開。畫筆每一筆自動存檔；講義與作答分開存。</p>
-    <p class="muted">版號 v9　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v10　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const lec = document.getElementById("zones-lecture");
@@ -128,23 +67,6 @@ function renderHome() {
     lec.appendChild(zoneBtn(z, false));
     pra.appendChild(zoneBtn(z, true));
   }
-  document.getElementById("btn-toggle").onclick = async () => {
-    if (lesson.running) {
-      lesson.remainingMs = remaining();
-      lesson.running = false;
-    } else if (remaining() > 0) {
-      lesson.running = true;
-      lesson.anchorAt = Date.now();
-    }
-    await saveLesson();
-    renderHome();
-  };
-  document.getElementById("btn-reset").onclick = async () => {
-    lesson.remainingMs = TOTAL_MS;
-    lesson.running = false;
-    await saveLesson();
-    renderHome();
-  };
   renderFavorites();
 }
 

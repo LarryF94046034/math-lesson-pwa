@@ -35,14 +35,6 @@ input, textarea { font: inherit; }
 .muted { color: var(--muted); font-size: 13px; }
 .h1 { font-size: 28px; font-weight: 800; color: var(--ink-dark); margin: 2px 0 6px; }
 .h2 { font-size: 16px; font-weight: 700; color: var(--ink-dark); margin: 16px 0 8px; }
-.timer {
-  text-align: center;
-  font-size: 64px;
-  font-weight: 800;
-  color: var(--accent);
-  line-height: 1;
-  margin: 12px 0 4px;
-}
 .row { display: flex; gap: 8px; flex-wrap: wrap; }
 .row > * { flex: 1 1 140px; }
 .card {

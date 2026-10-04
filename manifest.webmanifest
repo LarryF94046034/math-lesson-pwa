@@ -1,7 +1,7 @@
 {
-  "name": "數學90分教案",
+  "name": "數學教案",
   "short_name": "數學教案",
-  "description": "國中數學1上 90分鐘教案與作答（本機存檔、可離線）",
+  "description": "國中數學1上教案與作答（本機存檔、可離線）",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
