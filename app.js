@@ -14,7 +14,7 @@ let tickTimer = null;
 let boardState = null;
 
 async function boot() {
-  const res = await fetch("data/questions.json");
+  const res = await fetch(new URL("data/questions.json", document.baseURI));
   data = await res.json();
   lesson = (await getKv("lesson")) || {
     remainingMs: TOTAL_MS,
