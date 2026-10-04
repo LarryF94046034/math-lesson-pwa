@@ -25,9 +25,7 @@ async function boot() {
     color: COLORS[0],
     textSp: 22,
     textColor: TEXT_COLORS[0],
-    layout: "portrait",
   };
-  if (prefs.layout !== "landscape" && prefs.layout !== "portrait") prefs.layout = "portrait";
   favorites = (await getKv("favorites")) || [];
   renderHome();
 }
@@ -58,7 +56,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：第一次連線開啟後，之後無網路也可開。畫筆每一筆自動存檔；講義與作答分開存。</p>
-    <p class="muted">版號 v10　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v11　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const lec = document.getElementById("zones-lecture");
@@ -247,12 +245,11 @@ async function openBoard(zoneId, index, practice) {
   ensureInk(inkDoc);
 
   app.innerHTML = `
-  <div class="board layout-portrait" id="board">
+  <div class="board layout-landscape" id="board" data-rot="0">
     <div class="board-rotator" id="board-rotator">
       <div class="board-top">
         <button id="btn-back">返回</button>
         <div class="board-title" id="board-title"></div>
-        <button class="orient-btn" id="btn-flip-view">翻轉畫面</button>
         <span class="tool-label">字</span>
         <input class="seek" type="range" id="text-size" min="0" max="28" />
         <span id="text-colors"></span>
@@ -350,21 +347,17 @@ async function openBoard(zoneId, index, practice) {
     const board = document.getElementById("board");
     const rotator = document.getElementById("board-rotator");
     if (!board || !rotator) return;
-    const layout = prefs.layout === "landscape" ? "landscape" : "portrait";
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const viewportPortrait = vh > vw;
-    // Soft-rotate to landscape UI when phone/browser is still upright.
-    const softLandscape = layout === "landscape" && viewportPortrait;
+    // Question board is always landscape; soft-rotate when the phone is upright.
+    const softLandscape = vh > vw;
 
-    board.classList.toggle("layout-portrait", layout === "portrait");
-    board.classList.toggle("layout-landscape", layout === "landscape");
+    board.classList.add("layout-landscape");
+    board.classList.remove("layout-portrait");
     board.classList.toggle("rot-90", softLandscape);
-    board.classList.toggle("rot-neg90", false);
-    board.classList.toggle("rot-180", false);
+    board.classList.remove("rot-neg90", "rot-180");
     board.dataset.rot = softLandscape ? "90" : "0";
 
-    // Inline pixel transform: more reliable than CSS dvh on Android WebView.
     if (softLandscape) {
       rotator.style.position = "absolute";
       rotator.style.width = vh + "px";
@@ -386,10 +379,6 @@ async function openBoard(zoneId, index, practice) {
       rotator.style.transform = "";
       rotator.style.transformOrigin = "";
     }
-
-    const flipBtn = document.getElementById("btn-flip-view");
-    flipBtn.classList.toggle("selected", layout === "landscape");
-    flipBtn.textContent = layout === "landscape" ? "直向畫面" : "翻轉畫面";
 
     requestAnimationFrame(() => {
       resizeAll();
@@ -471,11 +460,6 @@ async function openBoard(zoneId, index, practice) {
     window.removeEventListener("resize", onWinResize);
     window.removeEventListener("orientationchange", onWinResize);
     renderZone(zoneId, practice);
-  };
-  document.getElementById("btn-flip-view").onclick = async () => {
-    prefs.layout = prefs.layout === "landscape" ? "portrait" : "landscape";
-    applyLayout();
-    await savePrefs();
   };
   document.getElementById("btn-prev").onclick = async () => {
     if (index > 0) {
@@ -607,6 +591,7 @@ async function openBoard(zoneId, index, practice) {
   boardState = { resizeAll, applyLayout };
   applyLayout();
   await show();
+  applyLayout();
 }
 
 function ensureInk(doc) {

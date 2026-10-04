@@ -4,20 +4,80 @@ export function boardRotateDeg() {
   return n === 90 ? 90 : 0;
 }
 
+/** Map a viewport point into a unit quad (p1=TL, p2=TR, p3=BR, p4=BL). */
+function pointInQuad(p1, p2, p3, p4, x, y) {
+  const ax = p2.x - p1.x;
+  const ay = p2.y - p1.y;
+  const bx = p4.x - p1.x;
+  const by = p4.y - p1.y;
+  const dx = x - p1.x;
+  const dy = y - p1.y;
+  const det = ax * by - ay * bx;
+  if (Math.abs(det) < 1e-6) return null;
+  return {
+    x: (dx * by - dy * bx) / det,
+    y: (ax * dy - ay * dx) / det,
+  };
+}
+
 /**
  * Map viewport client coords → element local fractions [0..1],
- * undoing CSS rotate(90deg) on an ancestor.
+ * correctly under CSS rotate(90deg) soft-landscape.
  */
 export function clientToFraction(el, clientX, clientY) {
-  const r = el.getBoundingClientRect();
-  const w = el.clientWidth || r.width;
-  const h = el.clientHeight || r.height;
-  if (!w || !h) return { x: 0, y: 0 };
+  const w = el.clientWidth || 1;
+  const h = el.clientHeight || 1;
 
+  // Chrome / Android: true transformed border box corners.
+  if (typeof el.getBoxQuads === "function") {
+    try {
+      const quads = el.getBoxQuads({ box: "border" });
+      if (quads && quads[0]) {
+        const q = quads[0];
+        const frac = pointInQuad(q.p1, q.p2, q.p3, q.p4, clientX, clientY);
+        if (frac) {
+          return {
+            x: Math.min(1, Math.max(0, frac.x)),
+            y: Math.min(1, Math.max(0, frac.y)),
+          };
+        }
+      }
+    } catch (_) {
+      /* fall through */
+    }
+  }
+
+  const r = el.getBoundingClientRect();
   if (boardRotateDeg() === 90) {
+    // Soft-rotate around the board-rotator center (not each canvas center).
+    const rotator = document.getElementById("board-rotator");
+    if (rotator) {
+      const rr = rotator.getBoundingClientRect();
+      const rw = rotator.clientWidth || rr.width;
+      const rh = rotator.clientHeight || rr.height;
+      const rcx = rr.left + rr.width / 2;
+      const rcy = rr.top + rr.height / 2;
+      // Inverse of CSS rotate(90deg): (sx,sy) → (sy, -sx)
+      const sx = clientX - rcx;
+      const sy = clientY - rcy;
+      const rotX = rw / 2 + sy;
+      const rotY = rh / 2 - sx;
+
+      // Element origin inside rotator via untransformed offsets.
+      let ox = 0;
+      let oy = 0;
+      for (let n = el; n && n !== rotator; n = n.parentElement) {
+        ox += n.offsetLeft - (n.parentElement?.scrollLeft || 0);
+        oy += n.offsetTop - (n.parentElement?.scrollTop || 0);
+      }
+      return {
+        x: Math.min(1, Math.max(0, (rotX - ox) / w)),
+        y: Math.min(1, Math.max(0, (rotY - oy) / h)),
+      };
+    }
+
     const cx = r.left + r.width / 2;
     const cy = r.top + r.height / 2;
-    // Inverse of CSS rotate(90deg) around center.
     const lx = w / 2 + (clientY - cy);
     const ly = h / 2 - (clientX - cx);
     return {
@@ -35,7 +95,6 @@ export function clientToFraction(el, clientX, clientY) {
 /** Map screen movement into element-local pixels under soft-rotate. */
 export function screenDeltaToLocal(dx, dy) {
   if (boardRotateDeg() === 90) {
-    // Inverse rotate(90deg): (dx, dy) → (dy, -dx)
     return { dx: dy, dy: -dx };
   }
   return { dx, dy };
