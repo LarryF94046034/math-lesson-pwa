@@ -81,13 +81,17 @@ input, textarea { font: inherit; }
   background: #eceff1;
   transform-origin: center center;
 }
-/* Soft-rotate when the phone turns but the browser viewport stays locked. */
+/* Soft-rotate to landscape UI while the browser stays upright. */
 .board.rot-90 .board-rotator,
 .board.rot-neg90 .board-rotator {
+  width: 100vh;
+  height: 100vw;
   width: 100dvh;
   height: 100dvw;
   top: 50%;
   left: 50%;
+  right: auto;
+  bottom: auto;
   inset: auto;
 }
 .board.rot-90 .board-rotator {
@@ -97,10 +101,14 @@ input, textarea { font: inherit; }
   transform: translate(-50%, -50%) rotate(-90deg);
 }
 .board.rot-180 .board-rotator {
+  width: 100vw;
+  height: 100vh;
   width: 100dvw;
   height: 100dvh;
   top: 50%;
   left: 50%;
+  right: auto;
+  bottom: auto;
   inset: auto;
   transform: translate(-50%, -50%) rotate(180deg);
 }
