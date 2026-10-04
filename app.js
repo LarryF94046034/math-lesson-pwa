@@ -39,7 +39,9 @@ async function boot() {
     layoutLocked: false,
   };
   if (!prefs.layout) prefs.layout = "landscape";
-  if (typeof prefs.layoutLocked !== "boolean") prefs.layoutLocked = false;
+  // Always start unlocked so the board follows phone orientation freely.
+  prefs.layoutLocked = false;
+  await savePrefs();
   favorites = (await getKv("favorites")) || [];
   renderHome();
   startTick();
