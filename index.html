@@ -11,12 +11,12 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="styles.css?v=19" />
+  <link rel="stylesheet" href="styles.css?v=20" />
   <title>數學教案</title>
   <script>
     // One-shot: wipe stale PWA caches.
     (async () => {
-      const VER = "v19-point";
+      const VER = "v20-point";
       try {
         if (localStorage.getItem("mathPwaVer") === VER) return;
         if ("caches" in window) {
@@ -37,11 +37,11 @@
 </head>
 <body>
   <div id="app"></div>
-  <script type="module" src="app.js?v=19"></script>
+  <script type="module" src="app.js?v=20"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js?v=19", { scope: "./" }).catch(console.warn);
+        navigator.serviceWorker.register("./sw.js?v=20", { scope: "./" }).catch(console.warn);
       });
     }
   </script>
