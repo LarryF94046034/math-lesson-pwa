@@ -36,3 +36,22 @@ export async function setKv(key, value) {
 export function inkKey(questionId, practice) {
   return (practice ? "inkP:" : "inkL:") + questionId;
 }
+
+/** Delete every saved lecture/practice stroke document. */
+export async function clearAllInk() {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("kv", "readwrite");
+    const store = tx.objectStore("kv");
+    const req = store.openCursor();
+    req.onsuccess = () => {
+      const cursor = req.result;
+      if (!cursor) return;
+      const key = String(cursor.key);
+      if (key.startsWith("inkL:") || key.startsWith("inkP:")) cursor.delete();
+      cursor.continue();
+    };
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}

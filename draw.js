@@ -4,91 +4,70 @@ export function boardRotateDeg() {
   return n === 90 ? 90 : 0;
 }
 
-/** Map a viewport point into a unit quad (p1=TL, p2=TR, p3=BR, p4=BL). */
-function pointInQuad(p1, p2, p3, p4, x, y) {
-  const ax = p2.x - p1.x;
-  const ay = p2.y - p1.y;
-  const bx = p4.x - p1.x;
-  const by = p4.y - p1.y;
-  const dx = x - p1.x;
-  const dy = y - p1.y;
-  const det = ax * by - ay * bx;
-  if (Math.abs(det) < 1e-6) return null;
-  return {
-    x: (dx * by - dy * bx) / det,
-    y: (ax * dy - ay * dx) / det,
-  };
+function clamp01(n) {
+  return Math.min(1, Math.max(0, n));
+}
+
+/** Sum offsetLeft/Top from el up to (but not including) ancestor. */
+function offsetInAncestor(el, ancestor) {
+  let x = 0;
+  let y = 0;
+  let n = el;
+  while (n && n !== ancestor) {
+    x += n.offsetLeft;
+    y += n.offsetTop;
+    const parent = n.offsetParent;
+    if (parent === ancestor) break;
+    if (!parent) {
+      n = n.parentElement;
+      continue;
+    }
+    n = parent;
+  }
+  return { x, y };
 }
 
 /**
- * Map viewport client coords → element local fractions [0..1],
- * correctly under CSS rotate(90deg) soft-landscape.
+ * Map pointer → canvas local fractions [0..1].
+ * Prefer offsetX/Y; under soft-rotate fall back through the rotator matrix.
  */
-export function clientToFraction(el, clientX, clientY) {
-  const w = el.clientWidth || 1;
-  const h = el.clientHeight || 1;
+export function pointerToFraction(el, e) {
+  const w = Math.max(1, el.clientWidth || 1);
+  const h = Math.max(1, el.clientHeight || 1);
 
-  // Chrome / Android: true transformed border box corners.
-  if (typeof el.getBoxQuads === "function") {
-    try {
-      const quads = el.getBoxQuads({ box: "border" });
-      if (quads && quads[0]) {
-        const q = quads[0];
-        const frac = pointInQuad(q.p1, q.p2, q.p3, q.p4, clientX, clientY);
-        if (frac) {
-          return {
-            x: Math.min(1, Math.max(0, frac.x)),
-            y: Math.min(1, Math.max(0, frac.y)),
-          };
-        }
-      }
-    } catch (_) {
-      /* fall through */
+  if (e && Number.isFinite(e.offsetX) && Number.isFinite(e.offsetY)) {
+    // offsetX/Y are element-local on Chrome/Android even with ancestor CSS rotate.
+    if (e.target === el || e.currentTarget === el) {
+      return { x: clamp01(e.offsetX / w), y: clamp01(e.offsetY / h) };
+    }
+  }
+
+  const clientX = e.clientX;
+  const clientY = e.clientY;
+
+  if (boardRotateDeg() === 90) {
+    const rotator = document.getElementById("board-rotator");
+    if (rotator) {
+      const rr = rotator.getBoundingClientRect();
+      const rw = Math.max(1, rotator.clientWidth || rr.width);
+      const rh = Math.max(1, rotator.clientHeight || rr.height);
+      const rcx = rr.left + rr.width / 2;
+      const rcy = rr.top + rr.height / 2;
+      // Inverse of CSS rotate(90deg) around rotator center: (sx,sy) → (sy, -sx)
+      const rotX = rw / 2 + (clientY - rcy);
+      const rotY = rh / 2 - (clientX - rcx);
+      const off = offsetInAncestor(el, rotator);
+      return {
+        x: clamp01((rotX - off.x) / w),
+        y: clamp01((rotY - off.y) / h),
+      };
     }
   }
 
   const r = el.getBoundingClientRect();
-  if (boardRotateDeg() === 90) {
-    // Soft-rotate around the board-rotator center (not each canvas center).
-    const rotator = document.getElementById("board-rotator");
-    if (rotator) {
-      const rr = rotator.getBoundingClientRect();
-      const rw = rotator.clientWidth || rr.width;
-      const rh = rotator.clientHeight || rr.height;
-      const rcx = rr.left + rr.width / 2;
-      const rcy = rr.top + rr.height / 2;
-      // Inverse of CSS rotate(90deg): (sx,sy) → (sy, -sx)
-      const sx = clientX - rcx;
-      const sy = clientY - rcy;
-      const rotX = rw / 2 + sy;
-      const rotY = rh / 2 - sx;
-
-      // Element origin inside rotator via untransformed offsets.
-      let ox = 0;
-      let oy = 0;
-      for (let n = el; n && n !== rotator; n = n.parentElement) {
-        ox += n.offsetLeft - (n.parentElement?.scrollLeft || 0);
-        oy += n.offsetTop - (n.parentElement?.scrollTop || 0);
-      }
-      return {
-        x: Math.min(1, Math.max(0, (rotX - ox) / w)),
-        y: Math.min(1, Math.max(0, (rotY - oy) / h)),
-      };
-    }
-
-    const cx = r.left + r.width / 2;
-    const cy = r.top + r.height / 2;
-    const lx = w / 2 + (clientY - cy);
-    const ly = h / 2 - (clientX - cx);
-    return {
-      x: Math.min(1, Math.max(0, lx / w)),
-      y: Math.min(1, Math.max(0, ly / h)),
-    };
-  }
-
   return {
-    x: Math.min(1, Math.max(0, (clientX - r.left) / r.width)),
-    y: Math.min(1, Math.max(0, (clientY - r.top) / r.height)),
+    x: clamp01((clientX - r.left) / Math.max(1, r.width)),
+    y: clamp01((clientY - r.top) / Math.max(1, r.height)),
   };
 }
 
@@ -103,7 +82,7 @@ export function screenDeltaToLocal(dx, dy) {
 export class DrawBoard {
   constructor(canvas, { onStroke, label = "" } = {}) {
     this.canvas = canvas;
-    this.ctx = canvas.getContext("2d");
+    this.ctx = canvas.getContext("2d", { alpha: false });
     this.onStroke = onStroke;
     this.label = label;
     this.strokes = [];
@@ -118,6 +97,7 @@ export class DrawBoard {
 
   _bind() {
     const el = this.canvas;
+    el.style.touchAction = "none";
     el.addEventListener("pointerdown", (e) => this._down(e));
     el.addEventListener("pointermove", (e) => this._move(e));
     el.addEventListener("pointerup", (e) => this._up(e));
@@ -139,16 +119,24 @@ export class DrawBoard {
   }
 
   setStrokes(strokes) {
-    this.strokes = strokes ? strokes.map((s) => ({ ...s, points: s.points.slice() })) : [];
+    this.strokes = strokes ? strokes.map((s) => ({ ...s, points: (s.points || []).slice() })) : [];
+    this.active = null;
+    this.paint();
+  }
+
+  clear() {
+    this.strokes = [];
     this.active = null;
     this.paint();
   }
 
   resize() {
-    // clientWidth/Height stay in layout space; getBoundingClientRect swaps under rotate(90deg).
+    // Use layout size, not getBoundingClientRect (swaps under rotate(90deg)).
     const dpr = Math.max(1, window.devicePixelRatio || 1);
-    const w = Math.max(1, Math.floor((this.canvas.clientWidth || 1) * dpr));
-    const h = Math.max(1, Math.floor((this.canvas.clientHeight || 1) * dpr));
+    const cssW = Math.max(1, this.canvas.clientWidth || 1);
+    const cssH = Math.max(1, this.canvas.clientHeight || 1);
+    const w = Math.max(1, Math.floor(cssW * dpr));
+    const h = Math.max(1, Math.floor(cssH * dpr));
     if (this.canvas.width !== w || this.canvas.height !== h) {
       this.canvas.width = w;
       this.canvas.height = h;
@@ -157,13 +145,18 @@ export class DrawBoard {
   }
 
   _pos(e) {
-    return clientToFraction(this.canvas, e.clientX, e.clientY);
+    return pointerToFraction(this.canvas, e);
   }
 
   _down(e) {
     if (this.tool === "none") return;
     e.preventDefault();
-    this.canvas.setPointerCapture(e.pointerId);
+    e.stopPropagation();
+    try {
+      this.canvas.setPointerCapture(e.pointerId);
+    } catch (_) {
+      /* ignore */
+    }
     const p = this._pos(e);
     const width = (this.tool === "eraser" ? this.eraserPx : this.penPx) / Math.max(1, this.canvas.clientWidth);
     this.active = {
@@ -197,15 +190,15 @@ export class DrawBoard {
     const ctx = this.ctx;
     const w = this.canvas.width;
     const h = this.canvas.height;
+    if (!w || !h) return;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, w, h);
+    ctx.globalCompositeOperation = "source-over";
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, w, h);
-    ctx.save();
     for (const s of this.strokes) this._stroke(ctx, s, w, h);
     if (this.active) this._stroke(ctx, this.active, w, h);
-    ctx.restore();
     if (this.label) {
+      ctx.globalCompositeOperation = "source-over";
       ctx.fillStyle = "#9aa7b2";
       ctx.font = `${Math.max(14, w * 0.035)}px sans-serif`;
       ctx.fillText(this.label, 12, 28);
@@ -213,25 +206,21 @@ export class DrawBoard {
   }
 
   _stroke(ctx, stroke, w, h) {
-    if (!stroke.points.length) return;
-    const width = Math.max(2, stroke.widthFraction * w);
+    if (!stroke?.points?.length) return;
+    const width = Math.max(2, (stroke.widthFraction || 0.02) * w);
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.lineWidth = width;
-    if (stroke.eraser) {
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.strokeStyle = "rgba(0,0,0,1)";
-    } else {
-      ctx.globalCompositeOperation = "source-over";
-      ctx.strokeStyle = stroke.color || "#c62828";
-    }
+    // Eraser paints white so it reliably covers ink on an opaque canvas.
+    ctx.globalCompositeOperation = "source-over";
+    ctx.strokeStyle = stroke.eraser ? "#ffffff" : stroke.color || "#c62828";
+    ctx.fillStyle = stroke.eraser ? "#ffffff" : stroke.color || "#c62828";
+
     if (stroke.points.length === 1) {
       const p = stroke.points[0];
       ctx.beginPath();
       ctx.arc(p.x * w, p.y * h, width / 2, 0, Math.PI * 2);
-      ctx.fillStyle = stroke.eraser ? "rgba(0,0,0,1)" : stroke.color;
       ctx.fill();
-      ctx.globalCompositeOperation = "source-over";
       return;
     }
     ctx.beginPath();
@@ -240,7 +229,6 @@ export class DrawBoard {
       ctx.lineTo(stroke.points[i].x * w, stroke.points[i].y * h);
     }
     ctx.stroke();
-    ctx.globalCompositeOperation = "source-over";
   }
 }
 
@@ -259,6 +247,7 @@ export class ZoomImage {
 
   _bind() {
     const el = this.canvas;
+    el.style.touchAction = "none";
     el.addEventListener("pointerdown", (e) => {
       el.setPointerCapture(e.pointerId);
       this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
@@ -277,7 +266,11 @@ export class ZoomImage {
         const other = pts[0][0] === e.pointerId ? pts[1][1] : pts[0][1];
         const oldDist = Math.hypot(prev.x - other.x, prev.y - other.y) || 1;
         const newDist = Math.hypot(e.clientX - other.x, e.clientY - other.y) || 1;
-        const focus = clientToFraction(el, (e.clientX + other.x) / 2, (e.clientY + other.y) / 2);
+        const focus = pointerToFraction(el, {
+          target: null,
+          clientX: (e.clientX + other.x) / 2,
+          clientY: (e.clientY + other.y) / 2,
+        });
         const fx = focus.x * el.clientWidth;
         const fy = focus.y * el.clientHeight;
         let next = this.scale * (newDist / oldDist);

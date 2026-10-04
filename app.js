@@ -1,7 +1,8 @@
-import { getKv, setKv, inkKey } from "./db.js";
+import { getKv, setKv, inkKey, clearAllInk } from "./db.js";
 import { DrawBoard, ZoomImage } from "./draw.js";
 
 const ASSET_BASE = new URL("./", import.meta.url);
+const INK_RESET_MARK = "ink-reset-v12";
 
 function asset(path) {
   return new URL(path.replace(/^\.\//, ""), ASSET_BASE).href;
@@ -19,6 +20,11 @@ async function boot() {
   const res = await fetch(asset("data/questions.json"));
   if (!res.ok) throw new Error("questions.json " + res.status);
   data = await res.json();
+  // One-time wipe of mis-mapped strokes from older soft-rotate builds.
+  if (localStorage.getItem("inkReset") !== INK_RESET_MARK) {
+    await clearAllInk();
+    localStorage.setItem("inkReset", INK_RESET_MARK);
+  }
   prefs = (await getKv("prefs")) || {
     penPx: 6,
     eraserPx: 28,
@@ -56,7 +62,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：第一次連線開啟後，之後無網路也可開。畫筆每一筆自動存檔；講義與作答分開存。</p>
-    <p class="muted">版號 v11　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v12　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const lec = document.getElementById("zones-lecture");
@@ -260,7 +266,8 @@ async function openBoard(zoneId, index, practice) {
       </div>
       <div class="board-tools">
         <button id="btn-draw">繪圖</button>
-        <button id="btn-undo">重製</button>
+        <button id="btn-undo">復原</button>
+        <button id="btn-clear">清除本題</button>
         <button id="btn-eraser">橡皮擦</button>
         <span class="tool-label">筆粗</span>
         <input class="seek" type="range" id="pen-size" min="0" max="40" />
@@ -498,6 +505,16 @@ async function openBoard(zoneId, index, practice) {
     for (const d of draws) {
       if (d.zone === zone) d.board.setStrokes(inkDoc.zones[zone] || []);
     }
+    refreshMarks();
+    updateStatus();
+  };
+  document.getElementById("btn-clear").onclick = async () => {
+    if (!confirm("清除這一題的全部筆跡？")) return;
+    inkDoc = { zones: {}, order: [] };
+    ensureInk(inkDoc);
+    marked = "";
+    await setKv(inkKey(qs[index].id, practice), inkDoc);
+    for (const d of draws) d.board.clear();
     refreshMarks();
     updateStatus();
   };
