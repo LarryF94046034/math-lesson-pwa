@@ -12,7 +12,37 @@ function asset(path) {
   return new URL(path.replace(/^\.\//, ""), ASSET_BASE).href;
 }
 const COLORS = ["#c62828", "#1565c0", "#212121", "#2e7d32", "#ef6c00", "#6a1b9a"];
+const COLOR_NAMES = ["紅", "藍", "黑", "綠", "橙", "紫"];
 const TEXT_COLORS = ["#212121", "#1565c0", "#c62828", "#2e7d32"];
+const TEXT_COLOR_NAMES = ["黑", "藍", "紅", "綠"];
+const TEXT_SIZE_LEVELS = [16, 18, 20, 22, 24, 28, 32, 36];
+const PEN_SIZE_LEVELS = [3, 5, 7, 9, 12, 16, 20, 28];
+const ERASER_SIZE_LEVELS = [12, 18, 24, 32, 44, 56, 72, 90];
+const ANIM_POINT_OPTS = [5, 8, 10, 15, 20, 30];
+const ANIM_STROKE_OPTS = [300, 600, 900, 1200];
+
+function nearestLevel(levels, value, fallbackIndex = 0) {
+  let best = levels[fallbackIndex] ?? levels[0];
+  let bestDist = Math.abs(best - value);
+  for (const n of levels) {
+    const d = Math.abs(n - value);
+    if (d < bestDist) {
+      best = n;
+      bestDist = d;
+    }
+  }
+  return best;
+}
+
+function fillSelect(sel, values, labels) {
+  sel.innerHTML = "";
+  values.forEach((v, i) => {
+    const opt = document.createElement("option");
+    opt.value = String(v);
+    opt.textContent = labels ? labels[i] : String(v);
+    sel.appendChild(opt);
+  });
+}
 
 const app = document.getElementById("app");
 let data = null;
@@ -118,7 +148,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v16　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v17　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
@@ -375,38 +405,34 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   app.innerHTML = `
   <div class="board layout-landscape" id="board" data-rot="0">
     <div class="board-rotator" id="board-rotator">
-      <div class="board-top">
+      <div class="board-bar">
         <button id="btn-back">返回</button>
-        <div class="board-title" id="board-title"></div>
-        <span class="tool-label">字</span>
-        <input class="seek" type="range" id="text-size" min="0" max="28" />
-        <span id="text-colors"></span>
-        <button id="btn-fav" ${mentor ? 'style="display:none"' : ""}>收藏</button>
-        <button id="btn-solution" style="display:none">解答</button>
-        <button id="btn-prev">上一題</button>
-        <button id="btn-next">下一題</button>
-      </div>
-      <div class="board-tools" id="board-tools-edit" ${readOnly ? 'style="display:none"' : ""}>
-        <button id="btn-draw">繪圖</button>
-        <button id="btn-clear">清空</button>
-        <button id="btn-eraser">橡皮擦</button>
-        <span class="tool-label">筆粗</span>
-        <input class="seek" type="range" id="pen-size" min="0" max="40" />
-        <span id="pen-label"></span>
-        <span class="tool-label">橡皮</span>
-        <input class="seek" type="range" id="eraser-size" min="0" max="80" />
-        <span id="eraser-label"></span>
-        <span id="pen-colors"></span>
-      </div>
-      <div class="board-tools" id="board-tools-anim">
-        <button id="btn-anim">動畫</button>
-        <button id="btn-anim-stop" disabled>停止</button>
-        <span class="tool-label">點間隔</span>
-        <input class="anim-num" type="number" id="anim-point-ms" min="1" max="200" step="1" />
-        <span class="tool-label">ms</span>
-        <span class="tool-label">筆間隔</span>
-        <input class="anim-num" type="number" id="anim-stroke-ms" min="0" max="5000" step="50" />
-        <span class="tool-label">ms</span>
+        <div class="board-title-stack" id="board-title-stack">
+          <div id="title-mode"></div>
+          <div id="title-zone"></div>
+          <div id="title-page"></div>
+          <div id="title-label"></div>
+        </div>
+        <div class="board-controls">
+          <span id="edit-controls" ${readOnly ? 'style="display:none"' : ""}>
+            <button id="btn-draw">繪圖</button>
+            <button id="btn-clear">清空</button>
+            <button id="btn-eraser">橡皮擦</button>
+            <label>筆<select id="sel-pen-size"></select></label>
+            <label>筆色<select id="sel-pen-color"></select></label>
+            <label>橡皮<select id="sel-eraser-size"></select></label>
+          </span>
+          <button id="btn-anim">動畫</button>
+          <button id="btn-anim-stop" disabled>停止</button>
+          <label>點<select id="sel-anim-point"></select></label>
+          <label>筆隔<select id="sel-anim-stroke"></select></label>
+          <label>字<select id="sel-text-size"></select></label>
+          <label>字色<select id="sel-text-color"></select></label>
+          <button id="btn-fav" ${mentor ? 'style="display:none"' : ""}>收藏</button>
+          <button id="btn-solution" style="display:none">解答</button>
+          <button id="btn-prev">上題</button>
+          <button id="btn-next">下題</button>
+        </div>
       </div>
       <div class="board-status" id="board-status"></div>
       <div class="board-main">
@@ -659,8 +685,10 @@ async function openBoard(zoneId, index, practice, mentor = false) {
     ensureInk(inkDoc);
     marked = inkDoc.order.length ? inkDoc.order[inkDoc.order.length - 1] : "";
     const head = mentor ? (mentorEdit ? "導師編輯" : "導師示範") : practice ? "作答" : "講義";
-    document.getElementById("board-title").textContent =
-      `${head}　${z.title}　第 ${q.page} 頁　${q.label}`;
+    document.getElementById("title-mode").textContent = head;
+    document.getElementById("title-zone").textContent = z.title;
+    document.getElementById("title-page").textContent = `第 ${q.page} 頁`;
+    document.getElementById("title-label").textContent = q.label;
     document.getElementById("btn-prev").disabled = index <= 0;
     document.getElementById("btn-next").disabled = index >= qs.length - 1;
     const favBtn = document.getElementById("btn-fav");
@@ -757,23 +785,94 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   };
   document.getElementById("btn-anim").onclick = () => playAnimation();
   document.getElementById("btn-anim-stop").onclick = () => stopAnimation(true);
-  const animPointInput = document.getElementById("anim-point-ms");
-  const animStrokeInput = document.getElementById("anim-stroke-ms");
-  animPointInput.value = String(prefs.animPointMs ?? 8);
-  animStrokeInput.value = String(prefs.animStrokeMs ?? 300);
-  animPointInput.onchange = async () => {
-    prefs.animPointMs = Math.max(1, Math.min(200, +animPointInput.value || 8));
-    animPointInput.value = String(prefs.animPointMs);
+
+  const selTextSize = document.getElementById("sel-text-size");
+  const selTextColor = document.getElementById("sel-text-color");
+  const selAnimPoint = document.getElementById("sel-anim-point");
+  const selAnimStroke = document.getElementById("sel-anim-stroke");
+  fillSelect(
+    selTextSize,
+    TEXT_SIZE_LEVELS,
+    TEXT_SIZE_LEVELS.map((_, i) => String(i + 1))
+  );
+  fillSelect(selTextColor, TEXT_COLORS, TEXT_COLOR_NAMES);
+  fillSelect(selAnimPoint, ANIM_POINT_OPTS);
+  fillSelect(selAnimStroke, ANIM_STROKE_OPTS);
+  prefs.textSp = nearestLevel(TEXT_SIZE_LEVELS, prefs.textSp ?? 22, 3);
+  prefs.animPointMs = nearestLevel(ANIM_POINT_OPTS, prefs.animPointMs ?? 8, 1);
+  prefs.animStrokeMs = nearestLevel(ANIM_STROKE_OPTS, prefs.animStrokeMs ?? 300, 0);
+  selTextSize.value = String(prefs.textSp);
+  selTextColor.value = TEXT_COLORS.includes(prefs.textColor) ? prefs.textColor : TEXT_COLORS[0];
+  selAnimPoint.value = String(prefs.animPointMs);
+  selAnimStroke.value = String(prefs.animStrokeMs);
+  selTextSize.onchange = async () => {
+    prefs.textSp = +selTextSize.value;
+    refreshText();
     await savePrefs();
   };
-  animStrokeInput.onchange = async () => {
-    prefs.animStrokeMs = Math.max(0, Math.min(5000, +animStrokeInput.value || 300));
-    animStrokeInput.value = String(prefs.animStrokeMs);
+  selTextColor.onchange = async () => {
+    prefs.textColor = selTextColor.value;
+    refreshText();
+    await savePrefs();
+  };
+  selAnimPoint.onchange = async () => {
+    prefs.animPointMs = +selAnimPoint.value;
+    await savePrefs();
+  };
+  selAnimStroke.onchange = async () => {
+    prefs.animStrokeMs = +selAnimStroke.value;
     await savePrefs();
   };
   updateAnimButtons();
 
+  function setTool(next) {
+    tool = next;
+    for (const d of draws) d.board.setTool(tool);
+    const drawBtn = document.getElementById("btn-draw");
+    const eraserBtn = document.getElementById("btn-eraser");
+    if (drawBtn) drawBtn.classList.toggle("selected", tool === "pen");
+    if (eraserBtn) eraserBtn.classList.toggle("selected", tool === "eraser");
+    updateStatus();
+  }
+
   if (!readOnly) {
+    const selPenSize = document.getElementById("sel-pen-size");
+    const selPenColor = document.getElementById("sel-pen-color");
+    const selEraserSize = document.getElementById("sel-eraser-size");
+    fillSelect(
+      selPenSize,
+      PEN_SIZE_LEVELS,
+      PEN_SIZE_LEVELS.map((_, i) => String(i + 1))
+    );
+    fillSelect(selPenColor, COLORS, COLOR_NAMES);
+    fillSelect(
+      selEraserSize,
+      ERASER_SIZE_LEVELS,
+      ERASER_SIZE_LEVELS.map((_, i) => String(i + 1))
+    );
+    prefs.penPx = nearestLevel(PEN_SIZE_LEVELS, prefs.penPx ?? 6, 2);
+    prefs.eraserPx = nearestLevel(ERASER_SIZE_LEVELS, prefs.eraserPx ?? 28, 2);
+    prefs.color = COLORS.includes(prefs.color) ? prefs.color : COLORS[0];
+    selPenSize.value = String(prefs.penPx);
+    selPenColor.value = prefs.color;
+    selEraserSize.value = String(prefs.eraserPx);
+    selPenSize.onchange = async () => {
+      prefs.penPx = +selPenSize.value;
+      for (const d of draws) d.board.setStyle(prefs);
+      await savePrefs();
+    };
+    selPenColor.onchange = async () => {
+      prefs.color = selPenColor.value;
+      for (const d of draws) d.board.setStyle(prefs);
+      if (tool !== "pen") setTool("pen");
+      await savePrefs();
+    };
+    selEraserSize.onchange = async () => {
+      prefs.eraserPx = +selEraserSize.value;
+      for (const d of draws) d.board.setStyle(prefs);
+      await savePrefs();
+    };
+
     document.getElementById("btn-draw").onclick = () => {
       if (animPlaying) return;
       setTool(tool === "pen" ? "none" : "pen");
@@ -801,66 +900,6 @@ async function openBoard(zoneId, index, practice, mentor = false) {
       updateStatus();
     };
   }
-
-  function setTool(next) {
-    tool = next;
-    for (const d of draws) d.board.setTool(tool);
-    document.getElementById("btn-draw").classList.toggle("selected", tool === "pen");
-    document.getElementById("btn-eraser").classList.toggle("selected", tool === "eraser");
-    updateStatus();
-  }
-
-  const penSize = document.getElementById("pen-size");
-  const eraserSize = document.getElementById("eraser-size");
-  penSize.value = Math.max(0, Math.min(40, prefs.penPx - 2));
-  eraserSize.value = Math.max(0, Math.min(80, prefs.eraserPx - 12));
-  document.getElementById("pen-label").textContent = prefs.penPx;
-  document.getElementById("eraser-label").textContent = prefs.eraserPx;
-  penSize.oninput = async () => {
-    prefs.penPx = +penSize.value + 2;
-    document.getElementById("pen-label").textContent = prefs.penPx;
-    for (const d of draws) d.board.setStyle(prefs);
-    await savePrefs();
-  };
-  eraserSize.oninput = async () => {
-    prefs.eraserPx = +eraserSize.value + 12;
-    document.getElementById("eraser-label").textContent = prefs.eraserPx;
-    for (const d of draws) d.board.setStyle(prefs);
-    await savePrefs();
-  };
-
-  const penColors = document.getElementById("pen-colors");
-  for (const c of COLORS) {
-    const b = document.createElement("button");
-    b.className = "color-dot";
-    b.style.background = c;
-    b.onclick = async () => {
-      prefs.color = c;
-      for (const d of draws) d.board.setStyle(prefs);
-      if (tool !== "pen") setTool("pen");
-      await savePrefs();
-    };
-    penColors.appendChild(b);
-  }
-  const textColors = document.getElementById("text-colors");
-  for (const c of TEXT_COLORS) {
-    const b = document.createElement("button");
-    b.className = "color-dot";
-    b.style.background = c;
-    b.onclick = async () => {
-      prefs.textColor = c;
-      refreshText();
-      await savePrefs();
-    };
-    textColors.appendChild(b);
-  }
-  const textSize = document.getElementById("text-size");
-  textSize.value = Math.max(0, Math.min(28, prefs.textSp - 16));
-  textSize.oninput = async () => {
-    prefs.textSp = +textSize.value + 16;
-    refreshText();
-    await savePrefs();
-  };
 
   document.getElementById("answer-input").oninput = async (e) => {
     await setKv("attempt:" + qs[index].id, e.target.value);

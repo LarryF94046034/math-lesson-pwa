@@ -104,20 +104,77 @@ input, textarea { font: inherit; }
   inset: auto;
   transform: translate(-50%, -50%) rotate(180deg);
 }
-.board-top, .board-tools {
+.board-bar {
   display: flex;
   gap: 6px;
-  align-items: center;
-  padding: 6px;
-  overflow-x: auto;
-  background: #f7f9fb;
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  align-items: stretch;
+  padding: 4px 6px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  flex: 0 0 auto;
+  min-height: 0;
+}
+.board-bar > #btn-back {
+  align-self: center;
   flex: 0 0 auto;
 }
-.board-top { background: #fff; border-bottom: 1px solid var(--line); }
-.board-title { flex: 1; font-weight: 700; font-size: 13px; color: var(--ink-dark); min-width: 80px; }
-.board-status { font-size: 12px; color: var(--muted); padding: 0 8px 4px; flex: 0 0 auto; }
+.board-title-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  flex: 0 0 auto;
+  min-width: 70px;
+  max-width: 92px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink-dark);
+}
+.board-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.board-controls > #edit-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.board-controls button {
+  padding: 4px 8px;
+  font-size: 12px;
+  margin: 0;
+}
+.board-controls label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.board-controls select {
+  font-size: 12px;
+  padding: 2px 4px;
+  min-width: 44px;
+  max-width: 68px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink-dark);
+}
+.board-status {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 2px 8px;
+  flex: 0 0 auto;
+  line-height: 1.2;
+}
 .board-main {
   flex: 1;
   display: flex;
