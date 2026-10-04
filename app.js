@@ -1,7 +1,12 @@
 import { getKv, setKv, inkKey } from "./db.js";
 import { DrawBoard, ZoomImage } from "./draw.js";
 
+const ASSET_BASE = new URL("./", import.meta.url);
 const TOTAL_MS = 90 * 60 * 1000;
+
+function asset(path) {
+  return new URL(path.replace(/^\.\//, ""), ASSET_BASE).href;
+}
 const COLORS = ["#c62828", "#1565c0", "#212121", "#2e7d32", "#ef6c00", "#6a1b9a"];
 const TEXT_COLORS = ["#212121", "#1565c0", "#c62828", "#2e7d32"];
 
@@ -14,7 +19,8 @@ let tickTimer = null;
 let boardState = null;
 
 async function boot() {
-  const res = await fetch(new URL("data/questions.json", document.baseURI));
+  const res = await fetch(asset("data/questions.json"));
+  if (!res.ok) throw new Error("questions.json " + res.status);
   data = await res.json();
   lesson = (await getKv("lesson")) || {
     remainingMs: TOTAL_MS,
@@ -472,12 +478,13 @@ async function openBoard(zoneId, index, practice) {
 
   async function loadImage(q) {
     const img = new Image();
-    img.src = q.image;
+    const src = asset(q.image);
+    img.src = src;
     await img.decode();
     if (practice && !reveal) {
       await zoom.setSrc(coverCanvas(img));
     } else {
-      await zoom.setSrc(q.image);
+      await zoom.setSrc(src);
     }
   }
 
