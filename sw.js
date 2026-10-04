@@ -1,4 +1,4 @@
-const CACHE = "math-lesson-pwa-v18";
+const CACHE = "math-lesson-pwa-v19";
 const SHELL = [
   "./",
   "./index.html",

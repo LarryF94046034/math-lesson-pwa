@@ -18,7 +18,7 @@ const TEXT_COLOR_NAMES = ["黑", "藍", "紅", "綠"];
 const TEXT_SIZE_LEVELS = [16, 18, 20, 22, 24, 28, 32, 36];
 const PEN_SIZE_LEVELS = [3, 5, 7, 9, 12, 16, 20, 28];
 const ERASER_SIZE_LEVELS = [12, 18, 24, 32, 44, 56, 72, 90];
-const ANIM_POINT_OPTS = [1, 2, 3, 4, 5, 8, 10, 15, 20, 30];
+const ANIM_POINT_OPTS = [0.001, 0.01, 0.1, 1, 2, 3, 4, 5, 8, 10, 15, 20, 30];
 const ANIM_STROKE_OPTS = [300, 600, 900, 1200];
 
 function nearestLevel(levels, value, fallbackIndex = 0) {
@@ -96,7 +96,12 @@ async function boot() {
 }
 
 function sleep(ms) {
+  if (!(ms > 0)) return Promise.resolve();
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function nextFrame() {
+  return new Promise((resolve) => requestAnimationFrame(() => resolve()));
 }
 
 /** Rebuild global stroke sequence from inkDoc.order + per-zone arrays. */
@@ -148,7 +153,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v18　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v19　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
@@ -484,7 +489,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
       alert("這一題還沒有筆跡可播");
       return;
     }
-    const pointMs = Math.max(1, Math.min(200, +prefs.animPointMs || 8));
+    const pointMs = Math.max(0.001, Math.min(200, +prefs.animPointMs || 8));
     const strokeMs = Math.max(0, Math.min(5000, +prefs.animStrokeMs || 300));
     prefs.animPointMs = pointMs;
     prefs.animStrokeMs = strokeMs;
@@ -511,16 +516,42 @@ async function openBoard(zoneId, index, practice, mentor = false) {
           board.setStrokes(accumulated[zone].slice());
           continue;
         }
-        for (let i = 1; i <= pts.length; i++) {
-          if (animAbort) break;
-          const partial = {
-            eraser: !!stroke.eraser,
-            widthFraction: stroke.widthFraction,
-            color: stroke.color,
-            points: pts.slice(0, i),
-          };
-          board.setStrokes([...accumulated[zone], partial]);
-          await sleep(pointMs);
+        // Sub-4ms: browsers can't sleep that finely; batch points per animation frame.
+        if (pointMs < 4) {
+          let i = 0;
+          const frameMs = 1000 / 60;
+          while (i < pts.length) {
+            if (animAbort) break;
+            let virtual = 0;
+            do {
+              i++;
+              virtual += pointMs;
+            } while (i < pts.length && virtual < frameMs);
+            board.setStrokes([
+              ...accumulated[zone],
+              {
+                eraser: !!stroke.eraser,
+                widthFraction: stroke.widthFraction,
+                color: stroke.color,
+                points: pts.slice(0, i),
+              },
+            ]);
+            await nextFrame();
+          }
+        } else {
+          for (let i = 1; i <= pts.length; i++) {
+            if (animAbort) break;
+            board.setStrokes([
+              ...accumulated[zone],
+              {
+                eraser: !!stroke.eraser,
+                widthFraction: stroke.widthFraction,
+                color: stroke.color,
+                points: pts.slice(0, i),
+              },
+            ]);
+            await sleep(pointMs);
+          }
         }
         if (animAbort) break;
         accumulated[zone].push({
@@ -799,7 +830,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   fillSelect(selAnimPoint, ANIM_POINT_OPTS);
   fillSelect(selAnimStroke, ANIM_STROKE_OPTS);
   prefs.textSp = nearestLevel(TEXT_SIZE_LEVELS, prefs.textSp ?? 22, 3);
-  prefs.animPointMs = nearestLevel(ANIM_POINT_OPTS, prefs.animPointMs ?? 8, 1);
+  prefs.animPointMs = nearestLevel(ANIM_POINT_OPTS, prefs.animPointMs ?? 8);
   prefs.animStrokeMs = nearestLevel(ANIM_STROKE_OPTS, prefs.animStrokeMs ?? 300, 0);
   selTextSize.value = String(prefs.textSp);
   selTextColor.value = TEXT_COLORS.includes(prefs.textColor) ? prefs.textColor : TEXT_COLORS[0];

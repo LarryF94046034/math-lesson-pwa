@@ -18,11 +18,11 @@
           const regs = await navigator.serviceWorker.getRegistrations();
           await Promise.all(regs.map((r) => r.unregister()));
         }
-        localStorage.setItem("mathPwaVer", "v18-point");
+        localStorage.setItem("mathPwaVer", "v19-point");
       } catch (err) {
         console.warn(err);
       }
-      location.replace("./index.html?v=18");
+      location.replace("./index.html?v=19");
     })();
   </script>
 </body>
