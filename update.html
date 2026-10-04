@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>更新快取</title>
+</head>
+<body>
+  <p style="font-family: sans-serif; padding: 24px;">正在清除舊版快取，請稍候…</p>
+  <script>
+    (async () => {
+      try {
+        if ("caches" in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((k) => caches.delete(k)));
+        }
+        if ("serviceWorker" in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map((r) => r.unregister()));
+        }
+        localStorage.setItem("mathPwaVer", "v8-flip");
+      } catch (err) {
+        console.warn(err);
+      }
+      location.replace("./index.html?v=8");
+    })();
+  </script>
+</body>
+</html>
