@@ -425,9 +425,12 @@ async function openBoard(zoneId, index, practice) {
 
   function applyLayout() {
     const board = document.getElementById("board");
-    if (!board) return;
+    const rotator = document.getElementById("board-rotator");
+    if (!board || !rotator) return;
     const layout = prefs.layout === "landscape" ? "landscape" : "portrait";
-    const viewportPortrait = window.innerHeight > window.innerWidth;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const viewportPortrait = vh > vw;
     // Soft-rotate to landscape UI when phone/browser is still upright.
     const softLandscape = layout === "landscape" && viewportPortrait;
 
@@ -436,6 +439,29 @@ async function openBoard(zoneId, index, practice) {
     board.classList.toggle("rot-90", softLandscape);
     board.classList.toggle("rot-neg90", false);
     board.classList.toggle("rot-180", false);
+
+    // Inline pixel transform: more reliable than CSS dvh on Android WebView.
+    if (softLandscape) {
+      rotator.style.position = "absolute";
+      rotator.style.width = vh + "px";
+      rotator.style.height = vw + "px";
+      rotator.style.top = "50%";
+      rotator.style.left = "50%";
+      rotator.style.right = "auto";
+      rotator.style.bottom = "auto";
+      rotator.style.transform = "translate(-50%, -50%) rotate(90deg)";
+      rotator.style.transformOrigin = "center center";
+    } else {
+      rotator.style.position = "absolute";
+      rotator.style.width = "";
+      rotator.style.height = "";
+      rotator.style.top = "0";
+      rotator.style.left = "0";
+      rotator.style.right = "0";
+      rotator.style.bottom = "0";
+      rotator.style.transform = "";
+      rotator.style.transformOrigin = "";
+    }
 
     const flipBtn = document.getElementById("btn-flip-view");
     flipBtn.classList.toggle("selected", layout === "landscape");
@@ -524,8 +550,8 @@ async function openBoard(zoneId, index, practice) {
   };
   document.getElementById("btn-flip-view").onclick = async () => {
     prefs.layout = prefs.layout === "landscape" ? "portrait" : "landscape";
-    await savePrefs();
     applyLayout();
+    await savePrefs();
   };
   document.getElementById("btn-prev").onclick = async () => {
     if (index > 0) {

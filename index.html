@@ -9,16 +9,37 @@
   <meta name="theme-color" content="#12344C" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=8" />
   <title>數學90分教案</title>
+  <script>
+    // One-shot: wipe stale PWA caches that still show「固定畫面」.
+    (async () => {
+      const VER = "v8-flip";
+      try {
+        if (localStorage.getItem("mathPwaVer") === VER) return;
+        if ("caches" in window) {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((k) => caches.delete(k)));
+        }
+        if ("serviceWorker" in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map((r) => r.unregister()));
+        }
+        localStorage.setItem("mathPwaVer", VER);
+        location.reload();
+      } catch (err) {
+        console.warn(err);
+      }
+    })();
+  </script>
 </head>
 <body>
   <div id="app"></div>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=8"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(console.warn);
+        navigator.serviceWorker.register("./sw.js?v=8", { scope: "./" }).catch(console.warn);
       });
     }
   </script>
