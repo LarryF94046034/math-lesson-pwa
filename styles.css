@@ -79,16 +79,30 @@ input, textarea { font: inherit; }
   flex-direction: column;
   min-height: 0;
   background: #eceff1;
+  transform-origin: center center;
 }
-/* Phone held upright but user chose landscape: rotate UI to use the wide side */
-.board.layout-landscape.needs-rotate .board-rotator {
+/* Soft-rotate when the phone turns but the browser viewport stays locked. */
+.board.rot-90 .board-rotator,
+.board.rot-neg90 .board-rotator {
   width: 100dvh;
   height: 100dvw;
   top: 50%;
   left: 50%;
   inset: auto;
+}
+.board.rot-90 .board-rotator {
   transform: translate(-50%, -50%) rotate(90deg);
-  transform-origin: center center;
+}
+.board.rot-neg90 .board-rotator {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.board.rot-180 .board-rotator {
+  width: 100dvw;
+  height: 100dvh;
+  top: 50%;
+  left: 50%;
+  inset: auto;
+  transform: translate(-50%, -50%) rotate(180deg);
 }
 .board-top, .board-tools {
   display: flex;

@@ -1,4 +1,4 @@
-const CACHE = "math-lesson-pwa-v5";
+const CACHE = "math-lesson-pwa-v6";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

@@ -320,11 +320,29 @@ function coverCanvas(img) {
   return c.toDataURL("image/jpeg", 0.85);
 }
 
+async function ensureMotionPermission() {
+  if (
+    typeof DeviceOrientationEvent !== "undefined" &&
+    typeof DeviceOrientationEvent.requestPermission === "function"
+  ) {
+    try {
+      const r = await DeviceOrientationEvent.requestPermission();
+      return r === "granted";
+    } catch {
+      return false;
+    }
+  }
+  return true;
+}
+
 async function openBoard(zoneId, index, practice) {
+  // Must run in the same user-gesture turn on iOS before other awaits.
+  const motionOk = ensureMotionPermission();
   const qs = questionsOf(zoneId);
   const z = data.zones.find((x) => x.id === zoneId);
   let reveal = !practice;
   let inkDoc = (await getKv(inkKey(qs[index].id, practice))) || { zones: {}, order: [] };
+  await motionOk;
   ensureInk(inkDoc);
 
   app.innerHTML = `
@@ -427,28 +445,94 @@ async function openBoard(zoneId, index, practice) {
     for (const d of draws) d.board.resize();
   }
 
+  let sensorAngle = null; // 0 | 90 | -90 | 180 from deviceorientation
+  let applyTimer = 0;
+
+  function normalizeAngle(a) {
+    let n = ((a % 360) + 360) % 360;
+    if (n === 270) return -90;
+    if (n === 90) return 90;
+    if (n === 180) return 180;
+    return 0;
+  }
+
+  function viewportAngle() {
+    if (window.screen?.orientation && typeof screen.orientation.angle === "number") {
+      return normalizeAngle(screen.orientation.angle);
+    }
+    if (typeof window.orientation === "number") {
+      return normalizeAngle(window.orientation);
+    }
+    return window.innerWidth >= window.innerHeight ? 90 : 0;
+  }
+
+  function angleFromSensors(beta, gamma) {
+    if (beta == null || gamma == null) return null;
+    const absB = Math.abs(beta);
+    const absG = Math.abs(gamma);
+    // Near flat face-up/down: keep last known.
+    if (absB < 15 && absG < 15) return null;
+    if (absG > 45 && absG >= absB - 10) {
+      return gamma > 0 ? 90 : -90;
+    }
+    if (absB > 135) return 180;
+    return 0;
+  }
+
+  function physicalAngle() {
+    if (sensorAngle != null) return sensorAngle;
+    return viewportAngle();
+  }
+
+  /** CSS rotate needed so content follows the phone when the browser stays locked. */
+  function cssRotateAngle() {
+    const phys = physicalAngle();
+    const view = viewportAngle();
+    return normalizeAngle(phys - view);
+  }
+
   function detectLayout() {
-    return window.innerWidth >= window.innerHeight ? "landscape" : "portrait";
+    const a = Math.abs(physicalAngle());
+    return a === 90 ? "landscape" : "portrait";
   }
 
   function applyLayout() {
     const board = document.getElementById("board");
+    if (!board) return;
     if (!prefs.layoutLocked) {
       prefs.layout = detectLayout();
+      prefs.lockedAngle = cssRotateAngle();
     }
     const layout = prefs.layout === "portrait" ? "portrait" : "landscape";
+    const rot = prefs.layoutLocked
+      ? normalizeAngle(prefs.lockedAngle || 0)
+      : cssRotateAngle();
+
     board.classList.toggle("layout-portrait", layout === "portrait");
     board.classList.toggle("layout-landscape", layout === "landscape");
-    // Phone upright but locked/using landscape: rotate UI to wide side.
-    const needsRotate = layout === "landscape" && window.innerHeight > window.innerWidth;
-    board.classList.toggle("needs-rotate", needsRotate);
+    board.classList.toggle("rot-90", rot === 90);
+    board.classList.toggle("rot-neg90", rot === -90);
+    board.classList.toggle("rot-180", rot === 180);
+    board.classList.toggle("needs-rotate", rot === 90 || rot === -90 || rot === 180);
+
     const lockBtn = document.getElementById("btn-lock-view");
     lockBtn.classList.toggle("selected", !!prefs.layoutLocked);
     lockBtn.textContent = prefs.layoutLocked ? "已固定" : "固定畫面";
+
     requestAnimationFrame(() => {
       resizeAll();
       requestAnimationFrame(resizeAll);
     });
+  }
+
+  function scheduleApplyLayout() {
+    clearTimeout(applyTimer);
+    applyLayout();
+    // iOS often updates width/height after orientationchange.
+    applyTimer = setTimeout(() => {
+      applyLayout();
+      setTimeout(applyLayout, 200);
+    }, 80);
   }
 
   function updateStatus() {
@@ -524,14 +608,20 @@ async function openBoard(zoneId, index, practice) {
   document.getElementById("btn-back").onclick = () => {
     window.removeEventListener("resize", onWinResize);
     window.removeEventListener("orientationchange", onWinResize);
+    window.removeEventListener("deviceorientation", onDeviceOrient);
+    window.visualViewport?.removeEventListener("resize", onWinResize);
+    screen.orientation?.removeEventListener?.("change", onWinResize);
+    clearTimeout(applyTimer);
     renderZone(zoneId, practice);
   };
   document.getElementById("btn-lock-view").onclick = async () => {
     if (prefs.layoutLocked) {
       prefs.layoutLocked = false;
       prefs.layout = detectLayout();
+      prefs.lockedAngle = cssRotateAngle();
     } else {
       prefs.layout = detectLayout();
+      prefs.lockedAngle = cssRotateAngle();
       prefs.layoutLocked = true;
     }
     await savePrefs();
@@ -661,11 +751,21 @@ async function openBoard(zoneId, index, practice) {
     await setKv("attemptY:" + qs[index].id, card.offsetTop / window.innerHeight);
   });
 
-  const onWinResize = () => applyLayout();
+  const onWinResize = () => scheduleApplyLayout();
+  const onDeviceOrient = (e) => {
+    if (prefs.layoutLocked) return;
+    const next = angleFromSensors(e.beta, e.gamma);
+    if (next == null || next === sensorAngle) return;
+    sensorAngle = next;
+    scheduleApplyLayout();
+  };
   window.addEventListener("resize", onWinResize);
   window.addEventListener("orientationchange", onWinResize);
+  window.addEventListener("deviceorientation", onDeviceOrient);
+  window.visualViewport?.addEventListener("resize", onWinResize);
+  screen.orientation?.addEventListener?.("change", onWinResize);
   boardState = { resizeAll, applyLayout };
-  applyLayout();
+  scheduleApplyLayout();
   await show();
 }
 
