@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Classroom demo: mentor board is world-readable/writable.
+    // Teacher password is enforced only in the web UI.
+    match /mentorInk/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

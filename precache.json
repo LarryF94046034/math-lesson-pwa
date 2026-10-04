@@ -5,6 +5,8 @@
   "./app.js",
   "./db.js",
   "./draw.js",
+  "./cloud.js",
+  "./firebase-config.js",
   "./manifest.webmanifest",
   "./sw.js",
   "./data/questions.json",

@@ -1,4 +1,4 @@
-const CACHE = "math-lesson-pwa-v13";
+const CACHE = "math-lesson-pwa-v14";
 const SHELL = [
   "./",
   "./index.html",
@@ -6,6 +6,8 @@ const SHELL = [
   "./app.js",
   "./db.js",
   "./draw.js",
+  "./cloud.js",
+  "./firebase-config.js",
   "./manifest.webmanifest",
   "./data/questions.json",
   "./404.html",
@@ -45,6 +47,8 @@ function isShell(url) {
     path.endsWith("/app.js") ||
     path.endsWith("/db.js") ||
     path.endsWith("/draw.js") ||
+    path.endsWith("/cloud.js") ||
+    path.endsWith("/firebase-config.js") ||
     path.endsWith("/styles.css") ||
     path.endsWith("/sw.js") ||
     path.endsWith("/manifest.webmanifest") ||

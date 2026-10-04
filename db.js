@@ -37,6 +37,11 @@ export function inkKey(questionId, practice) {
   return (practice ? "inkP:" : "inkL:") + questionId;
 }
 
+/** Local cache for mentor-board strokes (teacher device). */
+export function mentorInkKey(questionId) {
+  return "inkM:" + questionId;
+}
+
 /** Delete every saved lecture/practice stroke document. */
 export async function clearAllInk() {
   const db = await openDb();
