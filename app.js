@@ -119,6 +119,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：第一次連線開啟後，之後無網路也可開。畫筆每一筆自動存檔；講義與作答分開存。</p>
+    <p class="muted">版號 v9　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const lec = document.getElementById("zones-lecture");
@@ -439,6 +440,7 @@ async function openBoard(zoneId, index, practice) {
     board.classList.toggle("rot-90", softLandscape);
     board.classList.toggle("rot-neg90", false);
     board.classList.toggle("rot-180", false);
+    board.dataset.rot = softLandscape ? "90" : "0";
 
     // Inline pixel transform: more reliable than CSS dvh on Android WebView.
     if (softLandscape) {

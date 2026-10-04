@@ -1,3 +1,46 @@
+/** Degrees the board soft-rotates the UI (0 or 90). */
+export function boardRotateDeg() {
+  const n = Number(document.getElementById("board")?.dataset?.rot || 0);
+  return n === 90 ? 90 : 0;
+}
+
+/**
+ * Map viewport client coords → element local fractions [0..1],
+ * undoing CSS rotate(90deg) on an ancestor.
+ */
+export function clientToFraction(el, clientX, clientY) {
+  const r = el.getBoundingClientRect();
+  const w = el.clientWidth || r.width;
+  const h = el.clientHeight || r.height;
+  if (!w || !h) return { x: 0, y: 0 };
+
+  if (boardRotateDeg() === 90) {
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    // Inverse of CSS rotate(90deg) around center.
+    const lx = w / 2 + (clientY - cy);
+    const ly = h / 2 - (clientX - cx);
+    return {
+      x: Math.min(1, Math.max(0, lx / w)),
+      y: Math.min(1, Math.max(0, ly / h)),
+    };
+  }
+
+  return {
+    x: Math.min(1, Math.max(0, (clientX - r.left) / r.width)),
+    y: Math.min(1, Math.max(0, (clientY - r.top) / r.height)),
+  };
+}
+
+/** Map screen movement into element-local pixels under soft-rotate. */
+export function screenDeltaToLocal(dx, dy) {
+  if (boardRotateDeg() === 90) {
+    // Inverse rotate(90deg): (dx, dy) → (dy, -dx)
+    return { dx: dy, dy: -dx };
+  }
+  return { dx, dy };
+}
+
 export class DrawBoard {
   constructor(canvas, { onStroke, label = "" } = {}) {
     this.canvas = canvas;
@@ -43,10 +86,10 @@ export class DrawBoard {
   }
 
   resize() {
-    const rect = this.canvas.getBoundingClientRect();
+    // clientWidth/Height stay in layout space; getBoundingClientRect swaps under rotate(90deg).
     const dpr = Math.max(1, window.devicePixelRatio || 1);
-    const w = Math.max(1, Math.floor(rect.width * dpr));
-    const h = Math.max(1, Math.floor(rect.height * dpr));
+    const w = Math.max(1, Math.floor((this.canvas.clientWidth || 1) * dpr));
+    const h = Math.max(1, Math.floor((this.canvas.clientHeight || 1) * dpr));
     if (this.canvas.width !== w || this.canvas.height !== h) {
       this.canvas.width = w;
       this.canvas.height = h;
@@ -55,11 +98,7 @@ export class DrawBoard {
   }
 
   _pos(e) {
-    const r = this.canvas.getBoundingClientRect();
-    return {
-      x: (e.clientX - r.left) / r.width,
-      y: (e.clientY - r.top) / r.height,
-    };
+    return clientToFraction(this.canvas, e.clientX, e.clientY);
   }
 
   _down(e) {
@@ -67,7 +106,7 @@ export class DrawBoard {
     e.preventDefault();
     this.canvas.setPointerCapture(e.pointerId);
     const p = this._pos(e);
-    const width = (this.tool === "eraser" ? this.eraserPx : this.penPx) / this.canvas.clientWidth;
+    const width = (this.tool === "eraser" ? this.eraserPx : this.penPx) / Math.max(1, this.canvas.clientWidth);
     this.active = {
       eraser: this.tool === "eraser",
       widthFraction: width,
@@ -169,8 +208,9 @@ export class ZoomImage {
       if (!this.pointers.has(e.pointerId)) return;
       const prev = this.pointers.get(e.pointerId);
       if (this.pointers.size === 1) {
-        this.panX += e.clientX - prev.x;
-        this.panY += e.clientY - prev.y;
+        const { dx, dy } = screenDeltaToLocal(e.clientX - prev.x, e.clientY - prev.y);
+        this.panX += dx;
+        this.panY += dy;
         this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
         this.paint();
       } else if (this.pointers.size === 2) {
@@ -178,11 +218,9 @@ export class ZoomImage {
         const other = pts[0][0] === e.pointerId ? pts[1][1] : pts[0][1];
         const oldDist = Math.hypot(prev.x - other.x, prev.y - other.y) || 1;
         const newDist = Math.hypot(e.clientX - other.x, e.clientY - other.y) || 1;
-        const focusX = (e.clientX + other.x) / 2;
-        const focusY = (e.clientY + other.y) / 2;
-        const r = el.getBoundingClientRect();
-        const fx = focusX - r.left;
-        const fy = focusY - r.top;
+        const focus = clientToFraction(el, (e.clientX + other.x) / 2, (e.clientY + other.y) / 2);
+        const fx = focus.x * el.clientWidth;
+        const fy = focus.y * el.clientHeight;
         let next = this.scale * (newDist / oldDist);
         next = Math.min(this.fitScale * 6, Math.max(this.fitScale * 0.8, next));
         const factor = next / this.scale;
@@ -213,29 +251,30 @@ export class ZoomImage {
   }
 
   resize() {
-    const rect = this.canvas.getBoundingClientRect();
     const dpr = Math.max(1, window.devicePixelRatio || 1);
-    this.canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-    this.canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+    this.canvas.width = Math.max(1, Math.floor((this.canvas.clientWidth || 1) * dpr));
+    this.canvas.height = Math.max(1, Math.floor((this.canvas.clientHeight || 1) * dpr));
     this.paint();
   }
 
   fit() {
     if (!this.img) return;
-    const r = this.canvas.getBoundingClientRect();
-    this.fitScale = Math.min(r.width / this.img.naturalWidth, r.height / this.img.naturalHeight);
+    const width = this.canvas.clientWidth || 1;
+    const height = this.canvas.clientHeight || 1;
+    this.fitScale = Math.min(width / this.img.naturalWidth, height / this.img.naturalHeight);
     this.scale = this.fitScale;
-    this.panX = (r.width - this.img.naturalWidth * this.scale) / 2;
-    this.panY = (r.height - this.img.naturalHeight * this.scale) / 2;
+    this.panX = (width - this.img.naturalWidth * this.scale) / 2;
+    this.panY = (height - this.img.naturalHeight * this.scale) / 2;
   }
 
   paint() {
     const ctx = this.ctx;
     const dpr = Math.max(1, window.devicePixelRatio || 1);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const r = this.canvas.getBoundingClientRect();
+    const width = this.canvas.clientWidth || 1;
+    const height = this.canvas.clientHeight || 1;
     ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, r.width, r.height);
+    ctx.fillRect(0, 0, width, height);
     if (!this.img) return;
     ctx.drawImage(
       this.img,
