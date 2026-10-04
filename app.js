@@ -18,7 +18,7 @@ const TEXT_COLOR_NAMES = ["黑", "藍", "紅", "綠"];
 const TEXT_SIZE_LEVELS = [16, 18, 20, 22, 24, 28, 32, 36];
 const PEN_SIZE_LEVELS = [3, 5, 7, 9, 12, 16, 20, 28];
 const ERASER_SIZE_LEVELS = [12, 18, 24, 32, 44, 56, 72, 90];
-const ANIM_POINT_OPTS = [5, 8, 10, 15, 20, 30];
+const ANIM_POINT_OPTS = [1, 2, 3, 4, 5, 8, 10, 15, 20, 30];
 const ANIM_STROKE_OPTS = [300, 600, 900, 1200];
 
 function nearestLevel(levels, value, fallbackIndex = 0) {
@@ -148,7 +148,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v17　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v18　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
