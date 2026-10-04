@@ -8,7 +8,7 @@ export const firebaseConfig = {
   storageBucket: "teach-bba0b.firebasestorage.app",
   messagingSenderId: "48567893781",
   appId: "1:48567893781:web:5ce036c21df80d1461b31c",
-  measurementId: "G-J59604471B",
+  measurementId: "G-2M8SZ6Y6L8",
 };
 
 export function isFirebaseConfigured() {
