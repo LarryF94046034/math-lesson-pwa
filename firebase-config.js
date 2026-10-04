@@ -1,14 +1,14 @@
 /**
- * Paste your Firebase web app config here (Firebase Console → Project settings).
- * Spark (free) plan is enough. Enable Cloud Firestore in test/open mode for mentorInk.
+ * Firebase web app config for project Teach (teach-bba0b).
  */
 export const firebaseConfig = {
-  apiKey: "REPLACE_ME",
-  authDomain: "REPLACE_ME.firebaseapp.com",
-  projectId: "REPLACE_ME",
-  storageBucket: "REPLACE_ME.appspot.com",
-  messagingSenderId: "REPLACE_ME",
-  appId: "REPLACE_ME",
+  apiKey: "AIzaSyD1_TMnCFKns6XVGmgeUcWZe_uQq0qo6kc",
+  authDomain: "teach-bba0b.firebaseapp.com",
+  projectId: "teach-bba0b",
+  storageBucket: "teach-bba0b.firebasestorage.app",
+  messagingSenderId: "48567893781",
+  appId: "1:48567893781:web:5ce036c21df80d1461b31c",
+  measurementId: "G-J59604471B",
 };
 
 export function isFirebaseConfigured() {

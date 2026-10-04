@@ -96,7 +96,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v14　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v15　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
