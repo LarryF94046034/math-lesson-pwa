@@ -15,10 +15,26 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { firebaseConfig, isFirebaseConfigured } from "./firebase-config.js";
 
+const ALLOWED_EMAILS = new Set([
+  "larrylarry667667@gmail.com",
+  "larry667667@gmail.com",
+]);
+
 let app = null;
 let db = null;
 let auth = null;
 let initError = null;
+
+export function isAllowedEmail(email) {
+  return ALLOWED_EMAILS.has(String(email || "").trim().toLowerCase());
+}
+
+function assertAllowedEmail(email) {
+  if (isAllowedEmail(email)) return;
+  const err = new Error("此帳號未開放");
+  err.code = "auth/not-allowed";
+  throw err;
+}
 
 function mentorDocId(questionId) {
   // Firestore doc ids cannot contain "/"
@@ -72,12 +88,16 @@ export function watchAuth(callback) {
 
 export async function signInEmail(email, password) {
   if (!initCloud() || !auth) throw new Error("Firebase 尚未設定");
-  await signInWithEmailAndPassword(auth, String(email || "").trim(), password);
+  const normalized = String(email || "").trim();
+  assertAllowedEmail(normalized);
+  await signInWithEmailAndPassword(auth, normalized, password);
 }
 
 export async function registerEmail(email, password) {
   if (!initCloud() || !auth) throw new Error("Firebase 尚未設定");
-  await createUserWithEmailAndPassword(auth, String(email || "").trim(), password);
+  const normalized = String(email || "").trim();
+  assertAllowedEmail(normalized);
+  await createUserWithEmailAndPassword(auth, normalized, password);
 }
 
 export async function signOutUser() {
@@ -87,6 +107,7 @@ export async function signOutUser() {
 
 export function authErrorText(err) {
   const code = err?.code || "";
+  if (code === "auth/not-allowed") return "此帳號未開放";
   if (code === "auth/invalid-email") return "電子郵件格式不正確";
   if (code === "auth/invalid-credential" || code === "auth/user-not-found" || code === "auth/wrong-password") {
     return "帳號或密碼錯誤";

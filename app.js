@@ -11,6 +11,7 @@ import {
   registerEmail,
   signOutUser,
   authErrorText,
+  isAllowedEmail,
 } from "./cloud.js";
 import { isFirebaseConfigured } from "./firebase-config.js";
 
@@ -62,6 +63,7 @@ let favorites = [];
 let boardState = null;
 let studentUser = null;
 let authUid = "";
+let loginNotice = "";
 
 function isMentorAuthed() {
   return sessionStorage.getItem(MENTOR_AUTH_KEY) === "1";
@@ -126,8 +128,8 @@ function renderLogin(message = "") {
       </div>
       <div class="muted" id="auth-msg">${message}</div>
     </form>
-    <p class="muted">密碼至少 6 個字元。註冊後即可進入；作答仍存在這支手機。</p>
-    <p class="muted">版號 v21</p>
+    <p class="muted">只有已開放的電子郵件可以註冊或登入。密碼至少 6 個字元。</p>
+    <p class="muted">版號 v22</p>
   </div>`;
   const form = document.getElementById("auth-form");
   const emailEl = document.getElementById("auth-email");
@@ -157,11 +159,20 @@ async function boot() {
   }
   watchAuth(async (user) => {
     const next = user?.uid || "";
-    if (next && next === authUid && data) return;
+    if (next && next === authUid && data && isAllowedEmail(user?.email)) return;
     authUid = next;
     studentUser = user;
     if (!user) {
-      renderLogin();
+      const notice = loginNotice;
+      loginNotice = "";
+      renderLogin(notice);
+      return;
+    }
+    if (!isAllowedEmail(user.email)) {
+      loginNotice = "此帳號未開放";
+      authUid = "";
+      studentUser = null;
+      await signOutUser();
       return;
     }
     try {
@@ -236,7 +247,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v21　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v22　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
