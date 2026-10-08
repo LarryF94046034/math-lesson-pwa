@@ -129,7 +129,7 @@ function renderLogin(message = "") {
       <div class="muted" id="auth-msg">${message}</div>
     </form>
     <p class="muted">只有已開放的電子郵件可以註冊或登入。密碼至少 6 個字元。</p>
-    <p class="muted">版號 v22</p>
+    <p class="muted">版號 v23</p>
   </div>`;
   const form = document.getElementById("auth-form");
   const emailEl = document.getElementById("auth-email");
@@ -220,34 +220,64 @@ function renderHome() {
   boardState = null;
   const mentorOn = isMentorAuthed();
   const cloudOk = cloudReady();
+  const jhZones = data.zones.filter((z) => z.category === "國中數學" || z.id.startsWith("jh"));
+  const examZones = data.zones.filter((z) => z.category !== "國中數學" && !z.id.startsWith("jh"));
+
   app.innerHTML = `
   <div class="screen">
     <div class="muted">國中數學 1 上　教用　網頁版／PWA</div>
     <div class="h1">數學教案</div>
     <div class="row" style="align-items:center;margin-bottom:8px">
       <div class="muted" style="flex:1 1 180px">${studentUser?.email || ""}</div>
-      <button id="btn-student-logout" style="flex:0 0 auto">登出</button>
+      <button id="btn-mentor-auth" class="${mentorOn ? "selected" : ""}" style="flex:0 0 auto">${mentorOn ? "導師已登入（點此登出）" : "導師登入"}</button>
+      <button id="btn-student-logout" style="flex:0 0 auto">學生登出</button>
     </div>
-    <div class="muted">範圍 1-1～1-4　學生作答存在這支手機；導師四區發佈到雲端供全班看</div>
+    <div class="muted" id="mentor-status" style="margin-bottom:12px"></div>
 
-    <div class="h2">導師四區　全班看同一份板書</div>
-    <div class="muted" id="mentor-status"></div>
-    <div class="row" style="margin-bottom:8px">
-      <button class="primary" id="btn-mentor-auth">${mentorOn ? "導師已登入　點此登出" : "導師登入"}</button>
+    <div class="section-card">
+      <div class="cat-header">
+        <span class="cat-badge">新專區</span>
+        <span class="cat-title">國中數學（依章節分小區）</span>
+      </div>
+      <div class="muted" style="margin-bottom:10px">完整收錄講義範例、演練、繼續來挑戰、基礎題、精熟題、歷屆會考經典與資優挑戰題</div>
+
+      <div class="h2">導師區　全班看同一份板書</div>
+      <div class="row" id="jh-zones-mentor"></div>
+
+      <div class="h2">學生區　講義（顯示題目與答案）</div>
+      <div class="row" id="jh-zones-lecture"></div>
+
+      <div class="h2">學生區　作答區（答案先遮住・可手寫計算與核對）</div>
+      <div class="row" id="jh-zones-practice"></div>
+
+      <div class="h2">詳解區　繪製區顯示詳細解答（可自由放大縮小・唯讀禁繪製）</div>
+      <div class="row" id="jh-zones-solution"></div>
     </div>
-    <div class="row" id="zones-mentor"></div>
 
-    <div class="h2">四區題目　講義</div>
-    <div class="row" id="zones-lecture"></div>
+    <div class="section-card">
+      <div class="cat-header">
+        <span class="cat-title">段考試卷（原有四區）</span>
+      </div>
+      <div class="muted" style="margin-bottom:10px">範圍 1-1～1-4　學生作答存在這支手機；導師四區發佈到雲端供全班看</div>
 
-    <div class="h2">四區作答　答案先遮住</div>
-    <div class="row" id="zones-practice"></div>
+      <div class="h2">導師四區　全班看同一份板書</div>
+      <div class="row" id="zones-mentor"></div>
+
+      <div class="h2">四區題目　講義</div>
+      <div class="row" id="zones-lecture"></div>
+
+      <div class="h2">四區作答　答案先遮住</div>
+      <div class="row" id="zones-practice"></div>
+
+      <div class="h2">四區詳解　繪製區檢視解答（唯讀可縮放）</div>
+      <div class="row" id="zones-solution"></div>
+    </div>
 
     <div class="h2">收藏的題目</div>
     <div class="fav-list" id="fav-list"></div>
 
-    <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v22　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">離線可用：講義／作答畫筆存在本機。導師區需連線；換題時自動發佈。</p>
+    <p class="muted">版號 v23　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
@@ -257,8 +287,8 @@ function renderHome() {
     status.textContent = cloudStatus();
   } else {
     status.textContent = mentorOn
-      ? "導師模式：可編輯導師四區，換題／返回時自動發佈到雲端。"
-      : "學生模式：可看導師已發佈的板書（唯讀）。講義／作答仍可自己畫。";
+      ? "導師模式：可編輯導師區板書，換題／返回時自動發佈到雲端。"
+      : "學生模式：可看導師已發佈的板書（唯讀）。講義／作答區可自己畫；詳解區可自由縮放檢視詳解。";
   }
 
   document.getElementById("btn-student-logout").onclick = async () => {
@@ -274,26 +304,45 @@ function renderHome() {
     if (promptMentorLogin()) renderHome();
   };
 
+  const jhMen = document.getElementById("jh-zones-mentor");
+  const jhLec = document.getElementById("jh-zones-lecture");
+  const jhPra = document.getElementById("jh-zones-practice");
+  const jhSol = document.getElementById("jh-zones-solution");
+  for (const z of jhZones) {
+    jhMen.appendChild(zoneBtn(z, false, true, false));
+    jhLec.appendChild(zoneBtn(z, false, false, false));
+    jhPra.appendChild(zoneBtn(z, true, false, false));
+    jhSol.appendChild(zoneBtn(z, false, false, true));
+  }
+
   const lec = document.getElementById("zones-lecture");
   const pra = document.getElementById("zones-practice");
   const men = document.getElementById("zones-mentor");
-  for (const z of data.zones) {
-    lec.appendChild(zoneBtn(z, false, false));
-    pra.appendChild(zoneBtn(z, true, false));
-    men.appendChild(zoneBtn(z, false, true));
+  const sol = document.getElementById("zones-solution");
+  for (const z of examZones) {
+    lec.appendChild(zoneBtn(z, false, false, false));
+    pra.appendChild(zoneBtn(z, true, false, false));
+    men.appendChild(zoneBtn(z, false, true, false));
+    sol.appendChild(zoneBtn(z, false, false, true));
   }
   renderFavorites();
 }
 
-function zoneBtn(z, practice, mentor) {
+function zoneBtn(z, practice, mentor, solutionMode = false) {
   const b = document.createElement("button");
+  const countTag = z.questionCount ? `（共 ${z.questionCount} 題）` : "";
   if (mentor) {
-    b.textContent = `導師　${z.title}\n${z.pages}`;
+    b.textContent = `導師區｜${z.title}${countTag}\n${z.pages}`;
+  } else if (solutionMode) {
+    b.className = "sol-zone-btn";
+    b.textContent = `詳解區｜${z.title}${countTag}\n${z.pages}`;
+  } else if (practice) {
+    b.textContent = `作答區｜${z.title}${countTag}\n${z.pages}`;
   } else {
-    b.textContent = `${practice ? z.title + "作答" : z.title}\n${z.pages}`;
+    b.textContent = `講義區｜${z.title}${countTag}\n${z.pages}`;
   }
   b.style.whiteSpace = "pre-line";
-  b.onclick = () => renderZone(z.id, practice, mentor);
+  b.onclick = () => renderZone(z.id, practice, mentor, solutionMode);
   return b;
 }
 
@@ -311,33 +360,63 @@ async function renderFavorites() {
     const q = qs[item.index];
     if (!q) continue;
     const z = data.zones.find((x) => x.id === item.zone);
+    if (!z) continue;
     const b = document.createElement("button");
-    b.textContent = `${item.practice ? "作答" : "講義"}　${z.title}　第 ${q.page} 頁　${q.label}`;
-    b.onclick = () => openBoard(item.zone, item.index, item.practice);
+    const modeTag = item.solutionMode ? "詳解" : item.practice ? "作答" : "講義";
+    b.textContent = `${modeTag}　${z.title}　第 ${q.page} 頁　${q.label}`;
+    b.onclick = () => openBoard(item.zone, item.index, !!item.practice, false, !!item.solutionMode);
     box.appendChild(b);
   }
 }
 
-async function renderZone(zoneId, practice, mentor = false) {
+function pageSectionTitle(zoneId, page) {
+  if (zoneId !== "jh1_1") return `第 ${page} 頁`;
+  if (page >= 4 && page <= 13) return `第 ${page} 頁｜重點範例・演練・繼續來挑戰`;
+  if (page >= 14 && page <= 16) return `第 ${page} 頁｜1-1 試題搶先做 — 一、基礎題`;
+  if (page >= 17 && page <= 19) return `第 ${page} 頁｜1-1 試題搶先做 — 二、精熟題`;
+  if (page === 20) return `第 20 頁｜1-1 試題搶先做 — 三、優良經典題（歷屆會考）`;
+  if (page === 21) return `第 21 頁｜會考非選精熟試題`;
+  if (page === 22) return `第 22 頁｜資優挑戰題`;
+  return `第 ${page} 頁`;
+}
+
+async function renderZone(zoneId, practice, mentor = false, solutionMode = false) {
   const z = data.zones.find((x) => x.id === zoneId);
   const qs = questionsOf(zoneId);
-  const resultsOn = !mentor && practice && (await getKv("results:" + zoneId, false));
+  const resultsOn = !mentor && !solutionMode && practice && (await getKv("results:" + zoneId, false));
   const mentorEdit = mentor && isMentorAuthed();
-  let modeLabel = practice ? "作答　答案先遮住" : "講義";
+  let modeLabel = practice ? "學生區作答　答案先遮住（可手寫計算與輸入答案核對）" : "學生區講義　顯示題目與答案";
   if (mentor) {
     modeLabel = mentorEdit
       ? "導師板書　可編輯　換題自動發佈"
       : "導師板書　唯讀（看老師發佈內容）";
+  } else if (solutionMode) {
+    modeLabel = "詳解區　右側繪製區顯示詳細解答（可自由放大縮小・雙擊適應螢幕・無法進行繪製）";
   }
+  const modePrefix = mentor ? "導師區｜" : solutionMode ? "詳解區｜" : practice ? "作答區｜" : "講義區｜";
   let html = `
   <div class="screen">
-    <button id="back-home">← 回首頁</button>
-    <div class="h1">${mentor ? "導師　" : ""}${z.title}　${z.pages}</div>
-    <div class="muted">${modeLabel}</div>
+    <div class="row" style="align-items:center;margin-bottom:8px">
+      <button id="back-home" style="flex:0 0 auto">← 回首頁</button>
+      <div class="mode-tabs" style="flex:1 1 auto">
+        <button id="tab-lecture" class="${!mentor && !practice && !solutionMode ? "selected" : ""}">講義區</button>
+        <button id="tab-practice" class="${!mentor && practice && !solutionMode ? "selected" : ""}">作答區</button>
+        <button id="tab-solution" class="${solutionMode ? "selected" : ""}">詳解區</button>
+        <button id="tab-mentor" class="${mentor ? "selected" : ""}">導師區</button>
+      </div>
+    </div>
+    <div class="h1">${modePrefix}${z.title}</div>
+    <div class="muted" style="margin-bottom:4px">${z.pages}</div>
+    <div class="muted" style="margin-bottom:10px">${modeLabel}</div>
     <div class="q-list" id="q-list"></div>
   </div>`;
   app.innerHTML = html;
   document.getElementById("back-home").onclick = () => renderHome();
+  document.getElementById("tab-lecture").onclick = () => renderZone(zoneId, false, false, false);
+  document.getElementById("tab-practice").onclick = () => renderZone(zoneId, true, false, false);
+  document.getElementById("tab-solution").onclick = () => renderZone(zoneId, false, false, true);
+  document.getElementById("tab-mentor").onclick = () => renderZone(zoneId, false, true, false);
+
   const list = document.getElementById("q-list");
   let last = -1;
   for (let i = 0; i < qs.length; i++) {
@@ -346,7 +425,7 @@ async function renderZone(zoneId, practice, mentor = false) {
       last = q.page;
       const h = document.createElement("div");
       h.className = "page-head";
-      h.textContent = `第 ${q.page} 頁`;
+      h.textContent = pageSectionTitle(zoneId, q.page);
       list.appendChild(h);
     }
     const row = document.createElement("div");
@@ -354,7 +433,9 @@ async function renderZone(zoneId, practice, mentor = false) {
     row.style.marginBottom = "8px";
     const b = document.createElement("button");
     let suffix = q.kind === "choice" ? "　選擇題" : "　填充／計算";
-    if (resultsOn) {
+    if (solutionMode) {
+      suffix += "　（點擊查看詳解）";
+    } else if (resultsOn) {
       const typed = (await getKv("attempt:" + q.id, "")) || "";
       const ok = matchAnswer(q, typed);
       if (!String(typed).trim()) suffix += "　未作答";
@@ -362,15 +443,15 @@ async function renderZone(zoneId, practice, mentor = false) {
       else suffix += ok ? "　符合" : "　不符合";
     }
     b.textContent = q.label + suffix;
-    b.onclick = () => openBoard(zoneId, i, practice, mentor);
+    b.onclick = () => openBoard(zoneId, i, practice, mentor, solutionMode);
     if (!mentor) {
       const star = document.createElement("button");
-      const fav = isFav(zoneId, i, practice);
+      const fav = isFav(zoneId, i, practice, solutionMode);
       star.textContent = fav ? "已收藏" : "收藏";
       star.style.flex = "0 0 88px";
       star.onclick = async () => {
-        await toggleFav(zoneId, i, practice);
-        renderZone(zoneId, practice, mentor);
+        await toggleFav(zoneId, i, practice, solutionMode);
+        renderZone(zoneId, practice, mentor, solutionMode);
       };
       row.appendChild(b);
       row.appendChild(star);
@@ -379,27 +460,37 @@ async function renderZone(zoneId, practice, mentor = false) {
     }
     list.appendChild(row);
   }
-  if (!mentor && practice) {
+  if (!mentor && !solutionMode && practice) {
     const result = document.createElement("button");
     result.className = "primary";
     result.textContent = resultsOn ? "隱藏結果" : "結果";
     result.onclick = async () => {
       await setKv("results:" + zoneId, !resultsOn);
-      renderZone(zoneId, practice, mentor);
+      renderZone(zoneId, practice, mentor, solutionMode);
     };
     list.appendChild(result);
   }
 }
 
-function isFav(zone, index, practice) {
-  return favorites.some((f) => f.zone === zone && f.index === index && !!f.practice === !!practice);
+function isFav(zone, index, practice, solutionMode = false) {
+  return favorites.some(
+    (f) =>
+      f.zone === zone &&
+      f.index === index &&
+      !!f.practice === !!practice &&
+      !!f.solutionMode === !!solutionMode
+  );
 }
 
-async function toggleFav(zone, index, practice) {
+async function toggleFav(zone, index, practice, solutionMode = false) {
   favorites = (await getKv("favorites")) || [];
-  const key = `${zone}|${index}|${practice ? 1 : 0}`;
-  const next = favorites.filter((f) => `${f.zone}|${f.index}|${f.practice ? 1 : 0}` !== key);
-  if (next.length === favorites.length) next.push({ zone, index, practice: !!practice });
+  const key = `${zone}|${index}|${practice ? 1 : 0}|${solutionMode ? 1 : 0}`;
+  const next = favorites.filter(
+    (f) => `${f.zone}|${f.index}|${f.practice ? 1 : 0}|${f.solutionMode ? 1 : 0}` !== key
+  );
+  if (next.length === favorites.length) {
+    next.push({ zone, index, practice: !!practice, solutionMode: !!solutionMode });
+  }
   favorites = next;
   await setKv("favorites", favorites);
 }
@@ -496,13 +587,49 @@ async function saveInkLocal(questionId, practice, mentor, inkDoc) {
   else await setKv(inkKey(questionId, practice), inkDoc);
 }
 
-async function openBoard(zoneId, index, practice, mentor = false) {
+function makeFallbackSolutionDataUrl(q) {
+  const c = document.createElement("canvas");
+  c.width = 960;
+  c.height = 540;
+  const ctx = c.getContext("2d");
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.strokeStyle = "#1b4f72";
+  ctx.lineWidth = 4;
+  ctx.strokeRect(16, 16, c.width - 32, c.height - 32);
+  ctx.fillStyle = "#e7eef5";
+  ctx.fillRect(24, 24, c.width - 48, 64);
+  ctx.fillStyle = "#1b4f72";
+  ctx.font = "bold 28px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
+  ctx.fillText(`第 ${q.page} 頁　${q.label}　詳細解答`, 40, 66);
+  const ansText = q.answer ? q.answer.replace(/&/g, "、").replace(/\|/g, " 或 ") : "請參考題目說明";
+  ctx.fillStyle = "#1e7a46";
+  ctx.font = "bold 26px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
+  ctx.fillText(`標準答案：${ansText}`, 40, 134);
+  ctx.fillStyle = "#212121";
+  ctx.font = "21px 'PingFang TC', 'Microsoft JhengHei', sans-serif";
+  const lines = (q.body || "").split("\n");
+  let y = 195;
+  for (const line of lines) {
+    ctx.fillText(line.slice(0, 42), 40, y);
+    y += 32;
+    if (line.length > 42) {
+      ctx.fillText(line.slice(42, 84), 40, y);
+      y += 32;
+    }
+  }
+  return c.toDataURL("image/jpeg", 0.9);
+}
+
+async function openBoard(zoneId, index, practice, mentor = false, solutionMode = false) {
   const qs = questionsOf(zoneId);
   const z = data.zones.find((x) => x.id === zoneId);
   const mentorEdit = mentor && isMentorAuthed();
-  const readOnly = mentor && !mentorEdit;
-  let reveal = mentor ? true : !practice;
-  let inkDoc = await loadInkForBoard(qs[index].id, practice, mentor, mentorEdit);
+  const readOnly = solutionMode || (mentor && !mentorEdit);
+  let reveal = mentor || solutionMode ? true : !practice;
+  let inkDoc = solutionMode
+    ? { zones: {}, order: [] }
+    : await loadInkForBoard(qs[index].id, practice, mentor, mentorEdit);
   ensureInk(inkDoc);
 
   app.innerHTML = `
@@ -525,14 +652,22 @@ async function openBoard(zoneId, index, practice, mentor = false) {
             <label>筆色<select id="sel-pen-color"></select></label>
             <label>橡皮<select id="sel-eraser-size"></select></label>
           </span>
-          <button id="btn-anim">動畫</button>
-          <button id="btn-anim-stop" disabled>停止</button>
-          <label>點<select id="sel-anim-point"></select></label>
-          <label>筆隔<select id="sel-anim-stroke"></select></label>
+          <span id="anim-controls" ${solutionMode ? 'style="display:none"' : ""}>
+            <button id="btn-anim">動畫</button>
+            <button id="btn-anim-stop" disabled>停止</button>
+            <label>點<select id="sel-anim-point"></select></label>
+            <label>筆隔<select id="sel-anim-stroke"></select></label>
+          </span>
+          <span id="sol-zoom-controls" ${solutionMode ? "" : 'style="display:none"'}>
+            <button id="btn-sol-zoom-in" class="primary">詳解放大＋</button>
+            <button id="btn-sol-zoom-out" class="primary">詳解縮小－</button>
+            <button id="btn-sol-zoom-fit">詳解適應大小</button>
+          </span>
           <label>字<select id="sel-text-size"></select></label>
           <label>字色<select id="sel-text-color"></select></label>
           <button id="btn-fav" ${mentor ? 'style="display:none"' : ""}>收藏</button>
           <button id="btn-solution" style="display:none">解答</button>
+          <button id="btn-switch-mode">${solutionMode ? "去作答區" : "看詳解區"}</button>
           <button id="btn-prev">上題</button>
           <button id="btn-next">下題</button>
         </div>
@@ -553,6 +688,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   </div>`;
 
   const zoom = new ZoomImage(document.getElementById("zoom"));
+  let solZoom = null;
   const boardsEl = document.getElementById("boards");
   const draws = [];
   let tool = "none";
@@ -581,7 +717,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   }
 
   async function playAnimation() {
-    if (animPlaying) return;
+    if (animPlaying || solutionMode) return;
     const sequence = collectOrderedStrokes(inkDoc);
     if (!sequence.length) {
       alert("這一題還沒有筆跡可播");
@@ -614,7 +750,6 @@ async function openBoard(zoneId, index, practice, mentor = false) {
           board.setStrokes(accumulated[zone].slice());
           continue;
         }
-        // Sub-4ms: browsers can't sleep that finely; batch points per animation frame.
         if (pointMs < 4) {
           let i = 0;
           const frameMs = 1000 / 60;
@@ -675,7 +810,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   }
 
   async function publishCurrent(reason = "") {
-    if (!mentor || !mentorEdit) return;
+    if (!mentor || !mentorEdit || solutionMode) return;
     if (!cloudReady()) {
       console.warn("skip publish: cloud not ready", reason);
       return;
@@ -697,6 +832,25 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   function ensureBoards(q) {
     boardsEl.innerHTML = "";
     draws.length = 0;
+    solZoom = null;
+
+    if (solutionMode) {
+      boardsEl.className = "boards open solution-mode";
+      const cell = document.createElement("div");
+      cell.className = "draw-cell solution-cell";
+      const canvas = document.createElement("canvas");
+      canvas.id = "sol-zoom-canvas";
+      const tag = document.createElement("div");
+      tag.className = "draw-label solution-label";
+      tag.textContent = "詳解區｜可單指拖曳平移、雙指／滾輪自由放大縮小、雙擊適應大小（唯讀無法繪製）";
+      cell.appendChild(canvas);
+      cell.appendChild(tag);
+      boardsEl.appendChild(cell);
+      solZoom = new ZoomImage(canvas);
+      resizeAll();
+      return;
+    }
+
     boardsEl.className = "boards " + (q.kind === "choice" ? "choice" : "open");
     const specs =
       q.kind === "choice"
@@ -744,6 +898,7 @@ async function openBoard(zoneId, index, practice, mentor = false) {
 
   function resizeAll() {
     zoom.resize();
+    if (solZoom) solZoom.resize();
     for (const d of draws) d.board.resize();
   }
 
@@ -753,7 +908,6 @@ async function openBoard(zoneId, index, practice, mentor = false) {
     if (!board || !rotator) return;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    // Question board is always landscape; soft-rotate when the phone is upright.
     const softLandscape = vh > vw;
 
     board.classList.add("layout-landscape");
@@ -791,6 +945,11 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   }
 
   function updateStatus() {
+    if (solutionMode) {
+      document.getElementById("board-status").textContent =
+        "詳解區　右側繪製區顯示詳細解答　可自由放大縮小與拖曳平移（唯讀・無法進行繪製）";
+      return;
+    }
     const q = qs[index];
     const mode = readOnly
       ? "唯讀"
@@ -810,10 +969,20 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   async function show() {
     if (animPlaying) await stopAnimation(false);
     const q = qs[index];
-    inkDoc = await loadInkForBoard(q.id, practice, mentor, mentorEdit);
-    ensureInk(inkDoc);
-    marked = inkDoc.order.length ? inkDoc.order[inkDoc.order.length - 1] : "";
-    const head = mentor ? (mentorEdit ? "導師編輯" : "導師示範") : practice ? "作答" : "講義";
+    if (!solutionMode) {
+      inkDoc = await loadInkForBoard(q.id, practice, mentor, mentorEdit);
+      ensureInk(inkDoc);
+      marked = inkDoc.order.length ? inkDoc.order[inkDoc.order.length - 1] : "";
+    }
+    const head = solutionMode
+      ? "詳解區"
+      : mentor
+        ? mentorEdit
+          ? "導師編輯"
+          : "導師示範"
+        : practice
+          ? "作答"
+          : "講義";
     document.getElementById("title-mode").textContent = head;
     document.getElementById("title-zone").textContent = z.title;
     document.getElementById("title-page").textContent = `第 ${q.page} 頁`;
@@ -822,11 +991,11 @@ async function openBoard(zoneId, index, practice, mentor = false) {
     document.getElementById("btn-next").disabled = index >= qs.length - 1;
     const favBtn = document.getElementById("btn-fav");
     if (favBtn && !mentor) {
-      favBtn.textContent = isFav(zoneId, index, practice) ? "已收藏" : "收藏";
+      favBtn.textContent = isFav(zoneId, index, practice, solutionMode) ? "已收藏" : "收藏";
     }
     const sol = document.getElementById("btn-solution");
     const card = document.getElementById("answer-card");
-    if (!mentor && practice) {
+    if (!mentor && !solutionMode && practice) {
       sol.style.display = "";
       card.style.display = "";
       reveal = false;
@@ -868,10 +1037,19 @@ async function openBoard(zoneId, index, practice, mentor = false) {
     const src = asset(q.image);
     img.src = src;
     await img.decode();
-    if (!mentor && practice && !reveal) {
+    const isCleanStudentCrop = Boolean(q.solutionImage) || q.zone === "jh1_1";
+    if (!mentor && !solutionMode && practice && !reveal && !isCleanStudentCrop) {
       await zoom.setSrc(coverCanvas(img));
     } else {
       await zoom.setSrc(src);
+    }
+
+    if (solutionMode && solZoom) {
+      if (q.solutionImage) {
+        await solZoom.setSrc(asset(q.solutionImage));
+      } else {
+        await solZoom.setSrc(makeFallbackSolutionDataUrl(q));
+      }
     }
   }
 
@@ -880,8 +1058,26 @@ async function openBoard(zoneId, index, practice, mentor = false) {
     await publishCurrent("back");
     window.removeEventListener("resize", onWinResize);
     window.removeEventListener("orientationchange", onWinResize);
-    renderZone(zoneId, practice, mentor);
+    renderZone(zoneId, practice, mentor, solutionMode);
   };
+  document.getElementById("btn-switch-mode").onclick = async () => {
+    if (animPlaying) await stopAnimation(false);
+    await publishCurrent("switch-mode");
+    window.removeEventListener("resize", onWinResize);
+    window.removeEventListener("orientationchange", onWinResize);
+    if (solutionMode) {
+      openBoard(zoneId, index, true, false, false);
+    } else {
+      openBoard(zoneId, index, false, false, true);
+    }
+  };
+  const btnZoomIn = document.getElementById("btn-sol-zoom-in");
+  const btnZoomOut = document.getElementById("btn-sol-zoom-out");
+  const btnZoomFit = document.getElementById("btn-sol-zoom-fit");
+  if (btnZoomIn) btnZoomIn.onclick = () => solZoom && solZoom.zoomBy(1.25);
+  if (btnZoomOut) btnZoomOut.onclick = () => solZoom && solZoom.zoomBy(1 / 1.25);
+  if (btnZoomFit) btnZoomFit.onclick = () => solZoom && solZoom.resetZoom();
+
   document.getElementById("btn-prev").onclick = async () => {
     if (index <= 0) return;
     if (animPlaying) await stopAnimation(false);
@@ -902,8 +1098,8 @@ async function openBoard(zoneId, index, practice, mentor = false) {
   const favBtn = document.getElementById("btn-fav");
   if (favBtn && !mentor) {
     favBtn.onclick = async () => {
-      await toggleFav(zoneId, index, practice);
-      favBtn.textContent = isFav(zoneId, index, practice) ? "已收藏" : "收藏";
+      await toggleFav(zoneId, index, practice, solutionMode);
+      favBtn.textContent = isFav(zoneId, index, practice, solutionMode) ? "已收藏" : "收藏";
     };
   }
   document.getElementById("btn-solution").onclick = async () => {

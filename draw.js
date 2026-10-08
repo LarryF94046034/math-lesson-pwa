@@ -296,6 +296,41 @@ export class ZoomImage {
       this.fit();
       this.paint();
     });
+    el.addEventListener(
+      "wheel",
+      (e) => {
+        if (!this.img) return;
+        e.preventDefault();
+        const factor = e.deltaY < 0 ? 1.18 : 1 / 1.18;
+        const focus = pointerToFraction(el, e);
+        const fx = focus.x * (el.clientWidth || 1);
+        const fy = focus.y * (el.clientHeight || 1);
+        this._zoomAt(factor, fx, fy);
+      },
+      { passive: false }
+    );
+  }
+
+  _zoomAt(factor, fx, fy) {
+    if (!this.img) return;
+    let next = this.scale * factor;
+    next = Math.min(this.fitScale * 6, Math.max(this.fitScale * 0.5, next));
+    const actualFactor = next / this.scale;
+    this.panX = fx - actualFactor * (fx - this.panX);
+    this.panY = fy - actualFactor * (fy - this.panY);
+    this.scale = next;
+    this.paint();
+  }
+
+  zoomBy(factor) {
+    const w = this.canvas.clientWidth || 1;
+    const h = this.canvas.clientHeight || 1;
+    this._zoomAt(factor, w / 2, h / 2);
+  }
+
+  resetZoom() {
+    this.fit();
+    this.paint();
   }
 
   async setSrc(src) {

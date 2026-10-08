@@ -157,7 +157,9 @@ input, textarea { font: inherit; }
   flex: 1 1 auto;
   min-width: 0;
 }
-.board-controls > #edit-controls {
+.board-controls > #edit-controls,
+.board-controls > #anim-controls,
+.board-controls > #sol-zoom-controls {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -267,6 +269,66 @@ input, textarea { font: inherit; }
   color: #9aa7b2;
   font-size: 13px;
   pointer-events: none;
+}
+.draw-cell.solution-cell {
+  border: 2px solid #1e7a46;
+  background: #ffffff;
+  overflow: hidden;
+  cursor: grab;
+}
+.draw-cell.solution-cell:active {
+  cursor: grabbing;
+}
+.draw-label.solution-label {
+  background: rgba(231, 238, 245, 0.92);
+  color: #1b4f72;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid #c3d4e6;
+}
+.section-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(18, 52, 76, 0.04);
+}
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.cat-badge {
+  background: #1e7a46;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.cat-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink-dark);
+}
+.sol-zone-btn {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+  font-weight: 600;
+}
+.mode-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mode-tabs button {
+  padding: 8px 12px;
+  font-weight: 600;
 }
 .color-dot {
   width: 28px;
