@@ -1,6 +1,17 @@
 import { getKv, setKv, inkKey, mentorInkKey, clearAllInk } from "./db.js";
 import { DrawBoard, ZoomImage } from "./draw.js";
-import { initCloud, cloudReady, cloudStatus, fetchMentorInk, publishMentorInk } from "./cloud.js";
+import {
+  initCloud,
+  cloudReady,
+  cloudStatus,
+  fetchMentorInk,
+  publishMentorInk,
+  watchAuth,
+  signInEmail,
+  registerEmail,
+  signOutUser,
+  authErrorText,
+} from "./cloud.js";
 import { isFirebaseConfigured } from "./firebase-config.js";
 
 const ASSET_BASE = new URL("./", import.meta.url);
@@ -49,6 +60,8 @@ let data = null;
 let prefs = null;
 let favorites = [];
 let boardState = null;
+let studentUser = null;
+let authUid = "";
 
 function isMentorAuthed() {
   return sessionStorage.getItem(MENTOR_AUTH_KEY) === "1";
@@ -70,11 +83,11 @@ function promptMentorLogin() {
   return false;
 }
 
-async function boot() {
+async function loadLessonData() {
+  if (data) return;
   const res = await fetch(asset("data/questions.json"));
   if (!res.ok) throw new Error("questions.json " + res.status);
   data = await res.json();
-  // One-time wipe of mis-mapped strokes from older soft-rotate builds.
   if (localStorage.getItem("inkReset") !== INK_RESET_MARK) {
     await clearAllInk();
     localStorage.setItem("inkReset", INK_RESET_MARK);
@@ -91,8 +104,74 @@ async function boot() {
   if (prefs.animPointMs == null) prefs.animPointMs = 8;
   if (prefs.animStrokeMs == null) prefs.animStrokeMs = 300;
   favorites = (await getKv("favorites")) || [];
+}
+
+function renderLogin(message = "") {
+  boardState = null;
+  app.innerHTML = `
+  <div class="screen">
+    <div class="muted">國中數學 1 上　教用　網頁版／PWA</div>
+    <div class="h1">數學教案</div>
+    <div class="muted">請先用學生帳號登入，才能進入題目區。</div>
+    <form class="auth-card" id="auth-form">
+      <label>電子郵件
+        <input id="auth-email" type="email" autocomplete="username" required />
+      </label>
+      <label>密碼
+        <input id="auth-password" type="password" autocomplete="current-password" minlength="6" required />
+      </label>
+      <div class="row">
+        <button class="primary" type="submit">登入</button>
+        <button type="button" id="btn-register">註冊</button>
+      </div>
+      <div class="muted" id="auth-msg">${message}</div>
+    </form>
+    <p class="muted">密碼至少 6 個字元。註冊後即可進入；作答仍存在這支手機。</p>
+    <p class="muted">版號 v21</p>
+  </div>`;
+  const form = document.getElementById("auth-form");
+  const emailEl = document.getElementById("auth-email");
+  const passEl = document.getElementById("auth-password");
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signInEmail(emailEl.value, passEl.value);
+    } catch (err) {
+      document.getElementById("auth-msg").textContent = authErrorText(err);
+    }
+  };
+  document.getElementById("btn-register").onclick = async () => {
+    try {
+      await registerEmail(emailEl.value, passEl.value);
+    } catch (err) {
+      document.getElementById("auth-msg").textContent = authErrorText(err);
+    }
+  };
+}
+
+async function boot() {
   initCloud();
-  renderHome();
+  if (!isFirebaseConfigured()) {
+    app.innerHTML = `<div class="screen"><h1>尚未設定 Firebase</h1><p>無法開啟學生登入。</p></div>`;
+    return;
+  }
+  watchAuth(async (user) => {
+    const next = user?.uid || "";
+    if (next && next === authUid && data) return;
+    authUid = next;
+    studentUser = user;
+    if (!user) {
+      renderLogin();
+      return;
+    }
+    try {
+      await loadLessonData();
+      renderHome();
+    } catch (err) {
+      app.innerHTML = `<div class="screen"><h1>載入失敗</h1><pre>${err}</pre></div>`;
+      console.error(err);
+    }
+  });
 }
 
 function sleep(ms) {
@@ -134,6 +213,10 @@ function renderHome() {
   <div class="screen">
     <div class="muted">國中數學 1 上　教用　網頁版／PWA</div>
     <div class="h1">數學教案</div>
+    <div class="row" style="align-items:center;margin-bottom:8px">
+      <div class="muted" style="flex:1 1 180px">${studentUser?.email || ""}</div>
+      <button id="btn-student-logout" style="flex:0 0 auto">登出</button>
+    </div>
     <div class="muted">範圍 1-1～1-4　學生作答存在這支手機；導師四區發佈到雲端供全班看</div>
 
     <div class="h2">導師四區　全班看同一份板書</div>
@@ -153,7 +236,7 @@ function renderHome() {
     <div class="fav-list" id="fav-list"></div>
 
     <p class="muted">離線可用：講義／作答畫筆存在本機。導師四區需連線；換題時自動發佈。</p>
-    <p class="muted">版號 v20　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
+    <p class="muted">版號 v21　若不是此版，請用 Chrome 開啟；Facebook 內建瀏覽器常卡舊快取。</p>
   </div>`;
 
   const status = document.getElementById("mentor-status");
@@ -167,6 +250,10 @@ function renderHome() {
       : "學生模式：可看導師已發佈的板書（唯讀）。講義／作答仍可自己畫。";
   }
 
+  document.getElementById("btn-student-logout").onclick = async () => {
+    setMentorAuthed(false);
+    await signOutUser();
+  };
   document.getElementById("btn-mentor-auth").onclick = () => {
     if (isMentorAuthed()) {
       setMentorAuthed(false);

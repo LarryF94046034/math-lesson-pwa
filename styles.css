@@ -32,6 +32,24 @@ button:disabled { opacity: .45; }
 input, textarea { font: inherit; }
 
 .screen { padding: 16px; max-width: 920px; margin: 0 auto; }
+.auth-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+}
+.auth-card label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--ink-dark); }
+.auth-card input {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
 .muted { color: var(--muted); font-size: 13px; }
 .h1 { font-size: 28px; font-weight: 800; color: var(--ink-dark); margin: 2px 0 6px; }
 .h2 { font-size: 16px; font-weight: 700; color: var(--ink-dark); margin: 16px 0 8px; }
