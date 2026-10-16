@@ -370,13 +370,22 @@ async function renderFavorites() {
 }
 
 function pageSectionTitle(zoneId, page) {
-  if (zoneId !== "jh1_1") return `第 ${page} 頁`;
-  if (page >= 4 && page <= 13) return `第 ${page} 頁｜重點範例・演練・繼續來挑戰`;
-  if (page >= 14 && page <= 16) return `第 ${page} 頁｜1-1 試題搶先做 — 一、基礎題`;
-  if (page >= 17 && page <= 19) return `第 ${page} 頁｜1-1 試題搶先做 — 二、精熟題`;
-  if (page === 20) return `第 20 頁｜1-1 試題搶先做 — 三、優良經典題（歷屆會考）`;
-  if (page === 21) return `第 21 頁｜會考非選精熟試題`;
-  if (page === 22) return `第 22 頁｜資優挑戰題`;
+  if (zoneId === "jh1_1") {
+    if (page >= 4 && page <= 13) return `第 ${page} 頁｜重點範例・演練・繼續來挑戰`;
+    if (page >= 14 && page <= 16) return `第 ${page} 頁｜1-1 試題搶先做 — 一、基礎題`;
+    if (page >= 17 && page <= 19) return `第 ${page} 頁｜1-1 試題搶先做 — 二、精熟題`;
+    if (page === 20) return `第 20 頁｜1-1 試題搶先做 — 三、優良經典題（歷屆會考）`;
+    if (page === 21) return `第 21 頁｜會考非選精熟試題`;
+    if (page === 22) return `第 22 頁｜資優挑戰題`;
+  }
+  if (zoneId === "jh2_1") {
+    if (page >= 71 && page <= 79) return `第 ${page} 頁｜重點範例・演練・繼續來挑戰`;
+    if (page >= 80 && page <= 81) return `第 ${page} 頁｜2-1 試題搶先做 — 一、基礎題`;
+    if (page >= 82 && page <= 83) return `第 ${page} 頁｜2-1 試題搶先做 — 二、精熟題（附高解析詳解與進階觀點）`;
+    if (page === 84) return `第 84 頁｜2-1 試題搶先做 — 三、優良經典題（歷屆會考）`;
+    if (page === 85) return `第 85 頁｜會考非選精熟試題`;
+    if (page === 86) return `第 86 頁｜資優挑戰題`;
+  }
   return `第 ${page} 頁`;
 }
 
