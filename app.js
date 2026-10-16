@@ -676,9 +676,11 @@ async function openBoard(zoneId, index, practice, mentor = false, solutionMode =
           <label>字色<select id="sel-text-color"></select></label>
           <button id="btn-fav" ${mentor ? 'style="display:none"' : ""}>收藏</button>
           <button id="btn-solution" style="display:none">解答</button>
-          <button id="btn-switch-mode">${solutionMode ? "去作答區" : "看詳解區"}</button>
+          <button id="btn-switch-mode" ${mentor ? 'style="display:none"' : ""}>${solutionMode ? "去作答區" : "看詳解區"}</button>
           <button id="btn-prev">上題</button>
           <button id="btn-next">下題</button>
+          <button id="btn-to-solution" class="primary" title="導向該題詳解區" ${mentor ? "" : 'style="display:none"'}>詳解</button>
+          <button id="btn-to-mentor" class="primary" title="導向該題導師區" ${solutionMode ? "" : 'style="display:none"'}>導師</button>
         </div>
       </div>
       <div class="board-status" id="board-status"></div>
@@ -1104,6 +1106,25 @@ async function openBoard(zoneId, index, practice, mentor = false, solutionMode =
     index++;
     await show();
   };
+  const btnToSolution = document.getElementById("btn-to-solution");
+  if (btnToSolution) {
+    btnToSolution.onclick = async () => {
+      if (animPlaying) await stopAnimation(false);
+      await publishCurrent("to-solution");
+      window.removeEventListener("resize", onWinResize);
+      window.removeEventListener("orientationchange", onWinResize);
+      openBoard(zoneId, index, false, false, true);
+    };
+  }
+  const btnToMentor = document.getElementById("btn-to-mentor");
+  if (btnToMentor) {
+    btnToMentor.onclick = async () => {
+      if (animPlaying) await stopAnimation(false);
+      window.removeEventListener("resize", onWinResize);
+      window.removeEventListener("orientationchange", onWinResize);
+      openBoard(zoneId, index, false, true, false);
+    };
+  }
   const favBtn = document.getElementById("btn-fav");
   if (favBtn && !mentor) {
     favBtn.onclick = async () => {
