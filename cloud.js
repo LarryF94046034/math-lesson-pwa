@@ -18,6 +18,10 @@ import { firebaseConfig, isFirebaseConfigured } from "./firebase-config.js";
 const ALLOWED_EMAILS = new Set([
   "larrylarry667667@gmail.com",
   "larry667667@gmail.com",
+  "1150136@m2.ymjh.tyc.edu.tw",
+  "j1150172@cpshs.org.tw",
+  "t1150010@twnt5.thsh.tyc.edu.tw",
+  "1150137@m2-ymjh.tyc.edu.tw",
 ]);
 
 let app = null;
