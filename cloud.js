@@ -22,6 +22,7 @@ const ALLOWED_EMAILS = new Set([
   "j1150172@cpshs.org.tw",
   "t1150010@twnt5.thsh.tyc.edu.tw",
   "1150137@m2-ymjh.tyc.edu.tw",
+  "oioinahnahi.email@gmail.com",
 ]);
 
 let app = null;
