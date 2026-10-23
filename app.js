@@ -386,6 +386,15 @@ function pageSectionTitle(zoneId, page) {
     if (page === 85) return `第 85 頁｜會考非選精熟試題`;
     if (page === 86) return `第 86 頁｜資優挑戰題`;
   }
+  if (zoneId === "jh2_2") {
+    if (page >= 88 && page <= 92) return `第 ${page} 頁｜重點範例・演練・繼續來挑戰（最大公因數）`;
+    if (page >= 94 && page <= 97) return `第 ${page} 頁｜重點範例・演練・繼續來挑戰（最小公倍數）`;
+    if (page >= 98 && page <= 99) return `第 ${page} 頁｜2-2 試題搶先做 — 一、基礎題（附詳解與進階觀點）`;
+    if (page >= 100 && page <= 102) return `第 ${page} 頁｜2-2 試題搶先做 — 二、精熟題與素養題組`;
+    if (page === 103) return `第 103 頁｜2-2 試題搶先做 — 三、優良經典題（歷屆會考）`;
+    if (page === 104) return `第 104 頁｜會考非選精熟試題`;
+    if (page === 105) return `第 105 頁｜資優挑戰題`;
+  }
   return `第 ${page} 頁`;
 }
 

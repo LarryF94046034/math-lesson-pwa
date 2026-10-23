@@ -4462,5 +4462,1751 @@
     "left": 0.05,
     "right": 0.95,
     "out": "crops/jh2_1-p86-資優_3_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 88,
+    "top": 0.335,
+    "bottom": 0.81,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p88-範例_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 88,
+    "top": 0.335,
+    "bottom": 0.81,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p88-範例_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 88,
+    "top": 0.335,
+    "bottom": 0.81,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p88-演練_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 88,
+    "top": 0.335,
+    "bottom": 0.81,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p88-演練_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 88,
+    "top": 0.81,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p88-挑戰_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 88,
+    "top": 0.81,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p88-挑戰_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 89,
+    "top": 0.085,
+    "bottom": 0.465,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p89-範例_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 89,
+    "top": 0.085,
+    "bottom": 0.465,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p89-範例_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 89,
+    "top": 0.085,
+    "bottom": 0.465,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-演練_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 89,
+    "top": 0.085,
+    "bottom": 0.465,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-演練_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 89,
+    "top": 0.465,
+    "bottom": 0.565,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-挑戰_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 89,
+    "top": 0.465,
+    "bottom": 0.565,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-挑戰_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 89,
+    "top": 0.565,
+    "bottom": 0.88,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p89-範例_3.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 89,
+    "top": 0.565,
+    "bottom": 0.88,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p89-範例_3_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 89,
+    "top": 0.565,
+    "bottom": 0.88,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-演練_3.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 89,
+    "top": 0.565,
+    "bottom": 0.88,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-演練_3_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 89,
+    "top": 0.88,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-挑戰_3.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 89,
+    "top": 0.88,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p89-挑戰_3_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 90,
+    "top": 0.085,
+    "bottom": 0.395,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p90-範例_4.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 90,
+    "top": 0.085,
+    "bottom": 0.395,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p90-範例_4_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 90,
+    "top": 0.085,
+    "bottom": 0.395,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-演練_4.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 90,
+    "top": 0.085,
+    "bottom": 0.395,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-演練_4_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 90,
+    "top": 0.395,
+    "bottom": 0.505,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-挑戰_4.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 90,
+    "top": 0.395,
+    "bottom": 0.505,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-挑戰_4_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 90,
+    "top": 0.505,
+    "bottom": 0.89,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p90-範例_5.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 90,
+    "top": 0.505,
+    "bottom": 0.89,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p90-範例_5_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 90,
+    "top": 0.505,
+    "bottom": 0.89,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-演練_5.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 90,
+    "top": 0.505,
+    "bottom": 0.89,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-演練_5_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 90,
+    "top": 0.89,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-挑戰_5.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 90,
+    "top": 0.89,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p90-挑戰_5_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 91,
+    "top": 0.085,
+    "bottom": 0.475,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p91-範例_6.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 91,
+    "top": 0.085,
+    "bottom": 0.475,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p91-範例_6_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 91,
+    "top": 0.085,
+    "bottom": 0.475,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p91-演練_6.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 91,
+    "top": 0.085,
+    "bottom": 0.475,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p91-演練_6_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 91,
+    "top": 0.475,
+    "bottom": 0.545,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p91-挑戰_6.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 91,
+    "top": 0.475,
+    "bottom": 0.545,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p91-挑戰_6_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 91,
+    "top": 0.545,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p91-範例_7.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 91,
+    "top": 0.545,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p91-範例_7_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 91,
+    "top": 0.545,
+    "bottom": 0.965,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p91-演練_7.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 91,
+    "top": 0.545,
+    "bottom": 0.965,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p91-演練_7_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 92,
+    "top": 0.075,
+    "bottom": 0.225,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p92-挑戰_7.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 92,
+    "top": 0.075,
+    "bottom": 0.225,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p92-挑戰_7_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 92,
+    "top": 0.225,
+    "bottom": 0.855,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p92-範例_8.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 92,
+    "top": 0.225,
+    "bottom": 0.855,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p92-範例_8_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 92,
+    "top": 0.225,
+    "bottom": 0.855,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p92-演練_8.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 92,
+    "top": 0.225,
+    "bottom": 0.855,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p92-演練_8_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 92,
+    "top": 0.855,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p92-挑戰_8.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 92,
+    "top": 0.855,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p92-挑戰_8_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 94,
+    "top": 0.355,
+    "bottom": 0.81,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p94-範例_9.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 94,
+    "top": 0.355,
+    "bottom": 0.81,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p94-範例_9_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 94,
+    "top": 0.355,
+    "bottom": 0.81,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p94-演練_9.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 94,
+    "top": 0.355,
+    "bottom": 0.81,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p94-演練_9_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 94,
+    "top": 0.81,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p94-挑戰_9.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 94,
+    "top": 0.81,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p94-挑戰_9_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 95,
+    "top": 0.085,
+    "bottom": 0.49,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p95-範例_10.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 95,
+    "top": 0.085,
+    "bottom": 0.49,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p95-範例_10_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 95,
+    "top": 0.085,
+    "bottom": 0.49,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-演練_10.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 95,
+    "top": 0.085,
+    "bottom": 0.49,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-演練_10_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 95,
+    "top": 0.49,
+    "bottom": 0.615,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-挑戰_10.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 95,
+    "top": 0.49,
+    "bottom": 0.615,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-挑戰_10_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 95,
+    "top": 0.615,
+    "bottom": 0.885,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p95-範例_11.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 95,
+    "top": 0.615,
+    "bottom": 0.885,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p95-範例_11_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 95,
+    "top": 0.615,
+    "bottom": 0.885,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-演練_11.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 95,
+    "top": 0.615,
+    "bottom": 0.885,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-演練_11_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 95,
+    "top": 0.885,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-挑戰_11.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 95,
+    "top": 0.885,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p95-挑戰_11_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 96,
+    "top": 0.085,
+    "bottom": 0.415,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p96-範例_12.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 96,
+    "top": 0.085,
+    "bottom": 0.415,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p96-範例_12_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 96,
+    "top": 0.085,
+    "bottom": 0.415,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-演練_12.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 96,
+    "top": 0.085,
+    "bottom": 0.415,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-演練_12_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 96,
+    "top": 0.415,
+    "bottom": 0.47,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-挑戰_12.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 96,
+    "top": 0.415,
+    "bottom": 0.47,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-挑戰_12_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 96,
+    "top": 0.47,
+    "bottom": 0.895,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p96-範例_13.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 96,
+    "top": 0.47,
+    "bottom": 0.895,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p96-範例_13_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 96,
+    "top": 0.47,
+    "bottom": 0.895,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-演練_13.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 96,
+    "top": 0.47,
+    "bottom": 0.895,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-演練_13_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 96,
+    "top": 0.895,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-挑戰_13.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 96,
+    "top": 0.895,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p96-挑戰_13_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 97,
+    "top": 0.085,
+    "bottom": 0.305,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p97-範例_14.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 97,
+    "top": 0.085,
+    "bottom": 0.305,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p97-範例_14_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 97,
+    "top": 0.085,
+    "bottom": 0.305,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-演練_14.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 97,
+    "top": 0.085,
+    "bottom": 0.305,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-演練_14_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 97,
+    "top": 0.305,
+    "bottom": 0.365,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-挑戰_14.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 97,
+    "top": 0.305,
+    "bottom": 0.365,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-挑戰_14_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 97,
+    "top": 0.365,
+    "bottom": 0.86,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p97-範例_15.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 97,
+    "top": 0.365,
+    "bottom": 0.86,
+    "left": 0.05,
+    "right": 0.495,
+    "out": "crops/jh2_2-p97-範例_15_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 97,
+    "top": 0.365,
+    "bottom": 0.86,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-演練_15.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 97,
+    "top": 0.365,
+    "bottom": 0.86,
+    "left": 0.505,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-演練_15_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 97,
+    "top": 0.86,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-挑戰_15.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 97,
+    "top": 0.86,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p97-挑戰_15_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.165,
+    "bottom": 0.25,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.165,
+    "bottom": 0.25,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.25,
+    "bottom": 0.325,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.25,
+    "bottom": 0.325,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.325,
+    "bottom": 0.395,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_3.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.325,
+    "bottom": 0.395,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_3_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.395,
+    "bottom": 0.465,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_4.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.395,
+    "bottom": 0.465,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_4_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.465,
+    "bottom": 0.55,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_5.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.465,
+    "bottom": 0.55,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_5_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.55,
+    "bottom": 0.62,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_6.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.55,
+    "bottom": 0.62,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_6_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.62,
+    "bottom": 0.69,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_7.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.62,
+    "bottom": 0.69,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_7_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.69,
+    "bottom": 0.76,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_8.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.69,
+    "bottom": 0.76,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_8_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.76,
+    "bottom": 0.865,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_9.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.76,
+    "bottom": 0.865,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_9_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 98,
+    "top": 0.865,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_10.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 98,
+    "top": 0.865,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p98-基礎_10_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.08,
+    "bottom": 0.165,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_11.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.08,
+    "bottom": 0.165,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_11_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.165,
+    "bottom": 0.235,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_12.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.165,
+    "bottom": 0.235,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_12_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.235,
+    "bottom": 0.305,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_13.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.235,
+    "bottom": 0.305,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_13_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.305,
+    "bottom": 0.375,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_14.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.305,
+    "bottom": 0.375,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_14_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.375,
+    "bottom": 0.445,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_15.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.375,
+    "bottom": 0.445,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_15_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.445,
+    "bottom": 0.505,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_16.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.445,
+    "bottom": 0.505,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_16_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.505,
+    "bottom": 0.615,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_17.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.505,
+    "bottom": 0.615,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_17_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.615,
+    "bottom": 0.705,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_18.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.615,
+    "bottom": 0.705,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_18_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.705,
+    "bottom": 0.785,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_19.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.705,
+    "bottom": 0.785,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_19_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.785,
+    "bottom": 0.85,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_20.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.785,
+    "bottom": 0.85,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_20_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 99,
+    "top": 0.85,
+    "bottom": 0.97,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_21.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 99,
+    "top": 0.85,
+    "bottom": 0.97,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p99-基礎_21_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.065,
+    "bottom": 0.185,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.065,
+    "bottom": 0.185,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.185,
+    "bottom": 0.305,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.185,
+    "bottom": 0.305,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.305,
+    "bottom": 0.435,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_3.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.305,
+    "bottom": 0.435,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_3_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.435,
+    "bottom": 0.54,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_4.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.435,
+    "bottom": 0.54,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_4_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.54,
+    "bottom": 0.655,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_5.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.54,
+    "bottom": 0.655,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_5_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.655,
+    "bottom": 0.765,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_6.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.655,
+    "bottom": 0.765,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_6_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.765,
+    "bottom": 0.865,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_7.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.765,
+    "bottom": 0.865,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_7_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 100,
+    "top": 0.865,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_8.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 100,
+    "top": 0.865,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p100-精熟_8_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 101,
+    "top": 0.065,
+    "bottom": 0.19,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_9.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 101,
+    "top": 0.065,
+    "bottom": 0.19,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_9_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 101,
+    "top": 0.19,
+    "bottom": 0.32,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_10.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 101,
+    "top": 0.19,
+    "bottom": 0.32,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_10_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 101,
+    "top": 0.32,
+    "bottom": 0.45,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_11.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 101,
+    "top": 0.32,
+    "bottom": 0.45,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_11_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 101,
+    "top": 0.45,
+    "bottom": 0.61,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_12.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 101,
+    "top": 0.45,
+    "bottom": 0.61,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_12_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 101,
+    "top": 0.61,
+    "bottom": 0.78,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_13.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 101,
+    "top": 0.61,
+    "bottom": 0.78,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_13_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 101,
+    "top": 0.78,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_14.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 101,
+    "top": 0.78,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p101-精熟_14_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 102,
+    "top": 0.065,
+    "bottom": 0.24,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_15.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 102,
+    "top": 0.065,
+    "bottom": 0.24,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_15_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 102,
+    "top": 0.24,
+    "bottom": 0.44,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_16.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 102,
+    "top": 0.24,
+    "bottom": 0.44,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_16_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 102,
+    "top": 0.44,
+    "bottom": 0.59,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_17.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 102,
+    "top": 0.44,
+    "bottom": 0.59,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_17_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 102,
+    "top": 0.59,
+    "bottom": 0.635,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_18.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 102,
+    "top": 0.59,
+    "bottom": 0.635,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-精熟_18_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 102,
+    "top": 0.635,
+    "bottom": 0.825,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-素養_19.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 102,
+    "top": 0.635,
+    "bottom": 0.825,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-素養_19_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 102,
+    "top": 0.825,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-素養_20.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 102,
+    "top": 0.825,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p102-素養_20_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 103,
+    "top": 0.065,
+    "bottom": 0.2,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 103,
+    "top": 0.065,
+    "bottom": 0.2,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 103,
+    "top": 0.2,
+    "bottom": 0.34,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 103,
+    "top": 0.2,
+    "bottom": 0.34,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 103,
+    "top": 0.34,
+    "bottom": 0.48,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_3.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 103,
+    "top": 0.34,
+    "bottom": 0.48,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_3_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 103,
+    "top": 0.48,
+    "bottom": 0.62,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_4.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 103,
+    "top": 0.48,
+    "bottom": 0.62,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_4_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 103,
+    "top": 0.62,
+    "bottom": 0.78,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_5.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 103,
+    "top": 0.62,
+    "bottom": 0.78,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_5_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 103,
+    "top": 0.78,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_6.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 103,
+    "top": 0.78,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p103-歷屆_6_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 104,
+    "top": 0.14,
+    "bottom": 0.54,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p104-非選_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 104,
+    "top": 0.14,
+    "bottom": 0.54,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p104-非選_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 104,
+    "top": 0.54,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p104-非選_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 104,
+    "top": 0.54,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p104-非選_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 105,
+    "top": 0.14,
+    "bottom": 0.36,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p105-資優_1.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 105,
+    "top": 0.14,
+    "bottom": 0.36,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p105-資優_1_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 105,
+    "top": 0.36,
+    "bottom": 0.55,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p105-資優_2.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 105,
+    "top": 0.36,
+    "bottom": 0.55,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p105-資優_2_sol.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷.pdf",
+    "page": 105,
+    "top": 0.55,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p105-資優_3.jpg"
+  },
+  {
+    "pdf": "1上國中講義數學測驗卷解答.pdf",
+    "page": 105,
+    "top": 0.55,
+    "bottom": 0.965,
+    "left": 0.05,
+    "right": 0.95,
+    "out": "crops/jh2_2-p105-資優_3_sol.jpg"
   }
 ]
