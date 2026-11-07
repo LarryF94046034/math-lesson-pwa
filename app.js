@@ -129,7 +129,7 @@ function renderLogin(message = "") {
       <div class="muted" id="auth-msg">${message}</div>
     </form>
     <p class="muted">只有已開放的電子郵件可以註冊或登入。密碼至少 6 個字元。</p>
-    <p class="muted">版號 v31</p>
+    <p class="muted">版號 v32</p>
   </div>`;
   const form = document.getElementById("auth-form");
   const emailEl = document.getElementById("auth-email");
@@ -410,6 +410,14 @@ function pageSectionTitle(zoneId, page) {
     if (page === 137) return `第 137 頁｜2-4 試題搶先做 — 三、優良經典題（歷屆會考・附高解析詳解）`;
     if (page === 138) return `第 138 頁｜會考非選精熟試題`;
     if (page === 139) return `第 139 頁｜資優挑戰題`;
+  }
+  if (zoneId === "jh2_review") {
+    if (page >= 140 && page <= 141) return `第 ${page} 頁｜一、選擇題（每題 4 分，共 48 分）`;
+    if (page === 142) return `第 142 頁｜二、填充題（每格 4 分）＆ 三、計算題`;
+    if (page === 143) return `第 143 頁｜三、計算題（每題 8 分，共 32 分）`;
+  }
+  if (zoneId === "jh2_life") {
+    if (page === 144) return `第 144 頁｜生活中的數學素養題（天干與地支・干支紀年）`;
   }
   return `第 ${page} 頁`;
 }

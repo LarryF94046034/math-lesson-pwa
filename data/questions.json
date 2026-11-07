@@ -56,6 +56,28 @@
       "questionCount": 51
     },
     {
+      "id": "jh2_review",
+      "category": "國中數學",
+      "chapter": "第 2 章 自我評量",
+      "title": "第 2 章 自我評量",
+      "name": "第 2 章 自我評量",
+      "pages": "第 140–143 頁（選擇題・填充題・計算題）",
+      "description": "國中數學一上｜第 2 章 自我評量（含選擇題 12 題、填充題 5 題、計算題 4 題，附完整詳解與雙解觀點）",
+      "asset": "1上國中講義數學測驗卷.pdf",
+      "questionCount": 21
+    },
+    {
+      "id": "jh2_life",
+      "category": "國中數學",
+      "chapter": "第 2 章 素養題",
+      "title": "第 2 章 生活中的數學素養題",
+      "name": "第 2 章 生活中的數學素養題",
+      "pages": "第 144 頁（天干與地支）",
+      "description": "國中數學一上｜生活中的數學素養題（天干與地支干支紀年，附完整詳解與雙解觀點）",
+      "asset": "1上國中講義數學測驗卷.pdf",
+      "questionCount": 1
+    },
+    {
       "id": "exam",
       "title": "段考即時通",
       "pages": "第 1–4 頁",
@@ -8694,6 +8716,208 @@
         "type": "fill",
         "studentCrop": "crops/jh2_4-p139-資優_3.jpg",
         "solutionCrop": "crops/jh2_4-p139-資優_3_sol.jpg"
+      }
+    ],
+    "jh2_review": [
+      {
+        "id": "jh2_review-p140-選擇_1",
+        "page": 140,
+        "label": "第2章 選擇 1",
+        "answer": "(D)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p140-選擇_1.jpg",
+        "solutionCrop": "crops/jh2_review-p140-選擇_1_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p140-選擇_2",
+        "page": 140,
+        "label": "第2章 選擇 2",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p140-選擇_2.jpg",
+        "solutionCrop": "crops/jh2_review-p140-選擇_2_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p140-選擇_3",
+        "page": 140,
+        "label": "第2章 選擇 3",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p140-選擇_3.jpg",
+        "solutionCrop": "crops/jh2_review-p140-選擇_3_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p140-選擇_4",
+        "page": 140,
+        "label": "第2章 選擇 4",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p140-選擇_4.jpg",
+        "solutionCrop": "crops/jh2_review-p140-選擇_4_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p140-選擇_5",
+        "page": 140,
+        "label": "第2章 選擇 5",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p140-選擇_5.jpg",
+        "solutionCrop": "crops/jh2_review-p140-選擇_5_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p140-選擇_6",
+        "page": 140,
+        "label": "第2章 選擇 6",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p140-選擇_6.jpg",
+        "solutionCrop": "crops/jh2_review-p140-選擇_6_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p140-選擇_7",
+        "page": 140,
+        "label": "第2章 選擇 7",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p140-選擇_7.jpg",
+        "solutionCrop": "crops/jh2_review-p140-選擇_7_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p141-選擇_8",
+        "page": 141,
+        "label": "第2章 選擇 8",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p141-選擇_8.jpg",
+        "solutionCrop": "crops/jh2_review-p141-選擇_8_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p141-選擇_9",
+        "page": 141,
+        "label": "第2章 選擇 9",
+        "answer": "(D)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p141-選擇_9.jpg",
+        "solutionCrop": "crops/jh2_review-p141-選擇_9_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p141-選擇_10",
+        "page": 141,
+        "label": "第2章 選擇 10",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p141-選擇_10.jpg",
+        "solutionCrop": "crops/jh2_review-p141-選擇_10_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p141-選擇_11",
+        "page": 141,
+        "label": "第2章 選擇 11",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p141-選擇_11.jpg",
+        "solutionCrop": "crops/jh2_review-p141-選擇_11_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p141-選擇_12",
+        "page": 141,
+        "label": "第2章 選擇 12",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_review-p141-選擇_12.jpg",
+        "solutionCrop": "crops/jh2_review-p141-選擇_12_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p142-填充_1",
+        "page": 142,
+        "label": "第2章 填充 1",
+        "answer": "-7/3",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p142-填充_1.jpg",
+        "solutionCrop": "crops/jh2_review-p142-填充_1_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p142-填充_2",
+        "page": 142,
+        "label": "第2章 填充 2",
+        "answer": "5",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p142-填充_2.jpg",
+        "solutionCrop": "crops/jh2_review-p142-填充_2_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p142-填充_3",
+        "page": 142,
+        "label": "第2章 填充 3",
+        "answer": "-32",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p142-填充_3.jpg",
+        "solutionCrop": "crops/jh2_review-p142-填充_3_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p142-填充_4",
+        "page": 142,
+        "label": "第2章 填充 4",
+        "answer": "57",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p142-填充_4.jpg",
+        "solutionCrop": "crops/jh2_review-p142-填充_4_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p142-填充_5",
+        "page": 142,
+        "label": "第2章 填充 5",
+        "answer": "48",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p142-填充_5.jpg",
+        "solutionCrop": "crops/jh2_review-p142-填充_5_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p142-計算_1",
+        "page": 142,
+        "label": "第2章 計算 1",
+        "answer": "(1) 13/35；(2) -25/9",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p142-計算_1.jpg",
+        "solutionCrop": "crops/jh2_review-p142-計算_1_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p143-計算_2",
+        "page": 143,
+        "label": "第2章 計算 2",
+        "answer": "(1) A=2^9×3^12×7^4，B=2^8×3^6×11^4；(2) a+b=14，m+n-p-q=13",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p143-計算_2.jpg",
+        "solutionCrop": "crops/jh2_review-p143-計算_2_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p143-計算_3",
+        "page": 143,
+        "label": "第2章 計算 3",
+        "answer": "(1) 5/24；(2) 190 公頃",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p143-計算_3.jpg",
+        "solutionCrop": "crops/jh2_review-p143-計算_3_sol.jpg"
+      },
+      {
+        "id": "jh2_review-p143-計算_4",
+        "page": 143,
+        "label": "第2章 計算 4",
+        "answer": "(1) 35 位；(2) 11 個",
+        "type": "fill",
+        "studentCrop": "crops/jh2_review-p143-計算_4.jpg",
+        "solutionCrop": "crops/jh2_review-p143-計算_4_sol.jpg"
+      }
+    ],
+    "jh2_life": [
+      {
+        "id": "jh2_life-p144-素養_1",
+        "page": 144,
+        "label": "第2章 素養 1",
+        "answer": "(1) 60 年；(2) 子、戌、申、午、辰、寅",
+        "type": "fill",
+        "studentCrop": "crops/jh2_life-p144-素養_1.jpg",
+        "solutionCrop": "crops/jh2_life-p144-素養_1_sol.jpg"
       }
     ]
   }
