@@ -45,6 +45,17 @@
       "questionCount": 119
     },
     {
+      "id": "jh2_4",
+      "category": "國中數學",
+      "chapter": "2-4",
+      "title": "2-4 指數律",
+      "name": "2-4 指數律",
+      "pages": "第 130–139 頁（重點範例・基礎・精熟・會考・資優）",
+      "description": "國中數學一上｜重點範例演練、基礎題、精熟題、經典會考與資優挑戰（附完整詳解、國中速解技巧與進階觀點）",
+      "asset": "1上國中講義數學測驗卷.pdf",
+      "questionCount": 51
+    },
+    {
       "id": "exam",
       "title": "段考即時通",
       "pages": "第 1–4 頁",
@@ -8222,6 +8233,467 @@
         "answer": "50 秒",
         "image": "crops/jh2_3-p129-資優_4.jpg",
         "solutionImage": "crops/jh2_3-p129-資優_4_sol.jpg"
+      }
+    ],
+    "jh2_4": [
+      {
+        "id": "jh2_4-p130-範例_1",
+        "page": 130,
+        "label": "2-4 範例 1",
+        "answer": "-125/64（-1.953125）",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p130-範例_1.jpg",
+        "solutionCrop": "crops/jh2_4-p130-範例_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p130-演練_1",
+        "page": 130,
+        "label": "2-4 演練 1",
+        "answer": "16/625（0.0256）",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p130-演練_1.jpg",
+        "solutionCrop": "crops/jh2_4-p130-演練_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p130-挑戰_1",
+        "page": 130,
+        "label": "2-4 挑戰 1",
+        "answer": "(1) -64/27；(2) 81/16",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p130-挑戰_1.jpg",
+        "solutionCrop": "crops/jh2_4-p130-挑戰_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p131-範例_2",
+        "page": 131,
+        "label": "2-4 範例 2",
+        "answer": "(1) 2/3；(2) 21",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p131-範例_2.jpg",
+        "solutionCrop": "crops/jh2_4-p131-範例_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p131-演練_2",
+        "page": 131,
+        "label": "2-4 演練 2",
+        "answer": "(1) -2；(2) -4/5",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p131-演練_2.jpg",
+        "solutionCrop": "crops/jh2_4-p131-演練_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p131-挑戰_2",
+        "page": 131,
+        "label": "2-4 挑戰 2",
+        "answer": "(1) 5/4；(2) 8/3",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p131-挑戰_2.jpg",
+        "solutionCrop": "crops/jh2_4-p131-挑戰_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p131-範例_3",
+        "page": 131,
+        "label": "2-4 範例 3",
+        "answer": "(1) -2；(2) 223/20（11又3/20）",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p131-範例_3.jpg",
+        "solutionCrop": "crops/jh2_4-p131-範例_3_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p131-演練_3",
+        "page": 131,
+        "label": "2-4 演練 3",
+        "answer": "(1) 1；(2) 15/4（3又3/4）",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p131-演練_3.jpg",
+        "solutionCrop": "crops/jh2_4-p131-演練_3_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p131-挑戰_3",
+        "page": 131,
+        "label": "2-4 挑戰 3",
+        "answer": "-75",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p131-挑戰_3.jpg",
+        "solutionCrop": "crops/jh2_4-p131-挑戰_3_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p132-範例_4",
+        "page": 132,
+        "label": "2-4 範例 4",
+        "answer": "(1) 口=9；(2) 口=12；(3) 口=-45；(4) 口=12, △=9",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p132-範例_4.jpg",
+        "solutionCrop": "crops/jh2_4-p132-範例_4_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p132-演練_4",
+        "page": 132,
+        "label": "2-4 演練 4",
+        "answer": "(1) 口=4；(2) 口=42；(3) 口=-9；(4) 口=12, △=8",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p132-演練_4.jpg",
+        "solutionCrop": "crops/jh2_4-p132-演練_4_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p132-挑戰_4",
+        "page": 132,
+        "label": "2-4 挑戰 4",
+        "answer": "(1) 7；(2) 15；(3) 14；(4) 11；(5) 15/32；(6) 6",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p132-挑戰_4.jpg",
+        "solutionCrop": "crops/jh2_4-p132-挑戰_4_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p133-範例_5",
+        "page": 133,
+        "label": "2-4 範例 5",
+        "answer": "(1) 0；(2) 11/8（1又3/8）",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p133-範例_5.jpg",
+        "solutionCrop": "crops/jh2_4-p133-範例_5_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p133-演練_5",
+        "page": 133,
+        "label": "2-4 演練 5",
+        "answer": "(1) -124；(2) -32",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p133-演練_5.jpg",
+        "solutionCrop": "crops/jh2_4-p133-演練_5_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p133-挑戰_5",
+        "page": 133,
+        "label": "2-4 挑戰 5",
+        "answer": "(1) 9900；(2) 25/9",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p133-挑戰_5.jpg",
+        "solutionCrop": "crops/jh2_4-p133-挑戰_5_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p133-範例_6",
+        "page": 133,
+        "label": "2-4 範例 6",
+        "answer": "(1) (0.008)^5 > (0.0016)^4 > (0.04)^9；(2) (3/2)^10 > (27/8)^3 > (9/4)^4",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p133-範例_6.jpg",
+        "solutionCrop": "crops/jh2_4-p133-範例_6_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p133-演練_6",
+        "page": 133,
+        "label": "2-4 演練 6",
+        "answer": "(1) (0.027)^3 > (0.09)^5 > (0.0081)^3；(2) (64/27)^4 > (4/3)^11 > (16/9)^5",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p133-演練_6.jpg",
+        "solutionCrop": "crops/jh2_4-p133-演練_6_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p133-挑戰_6",
+        "page": 133,
+        "label": "2-4 挑戰 6",
+        "answer": "b > c > a",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p133-挑戰_6.jpg",
+        "solutionCrop": "crops/jh2_4-p133-挑戰_6_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p134-基礎_1",
+        "page": 134,
+        "label": "2-4 基礎 1",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p134-基礎_1.jpg",
+        "solutionCrop": "crops/jh2_4-p134-基礎_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p134-基礎_2",
+        "page": 134,
+        "label": "2-4 基礎 2",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p134-基礎_2.jpg",
+        "solutionCrop": "crops/jh2_4-p134-基礎_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p134-基礎_3",
+        "page": 134,
+        "label": "2-4 基礎 3",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p134-基礎_3.jpg",
+        "solutionCrop": "crops/jh2_4-p134-基礎_3_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p134-基礎_4",
+        "page": 134,
+        "label": "2-4 基礎 4",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p134-基礎_4.jpg",
+        "solutionCrop": "crops/jh2_4-p134-基礎_4_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p134-基礎_5",
+        "page": 134,
+        "label": "2-4 基礎 5",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p134-基礎_5.jpg",
+        "solutionCrop": "crops/jh2_4-p134-基礎_5_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p134-基礎_6",
+        "page": 134,
+        "label": "2-4 基礎 6",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p134-基礎_6.jpg",
+        "solutionCrop": "crops/jh2_4-p134-基礎_6_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_7",
+        "page": 135,
+        "label": "2-4 基礎 7",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_7.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_7_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_8",
+        "page": 135,
+        "label": "2-4 基礎 8",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_8.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_8_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_9",
+        "page": 135,
+        "label": "2-4 基礎 9",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_9.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_9_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_10",
+        "page": 135,
+        "label": "2-4 基礎 10",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_10.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_10_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_11",
+        "page": 135,
+        "label": "2-4 基礎 11",
+        "answer": "(D)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_11.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_11_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_12",
+        "page": 135,
+        "label": "2-4 基礎 12",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_12.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_12_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_13",
+        "page": 135,
+        "label": "2-4 基礎 13",
+        "answer": "(D)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_13.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_13_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p135-基礎_14",
+        "page": 135,
+        "label": "2-4 基礎 14",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p135-基礎_14.jpg",
+        "solutionCrop": "crops/jh2_4-p135-基礎_14_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p136-精熟_1",
+        "page": 136,
+        "label": "2-4 精熟 1",
+        "answer": "(D)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p136-精熟_1.jpg",
+        "solutionCrop": "crops/jh2_4-p136-精熟_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p136-精熟_2",
+        "page": 136,
+        "label": "2-4 精熟 2",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p136-精熟_2.jpg",
+        "solutionCrop": "crops/jh2_4-p136-精熟_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p136-精熟_3",
+        "page": 136,
+        "label": "2-4 精熟 3",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p136-精熟_3.jpg",
+        "solutionCrop": "crops/jh2_4-p136-精熟_3_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p136-精熟_4",
+        "page": 136,
+        "label": "2-4 精熟 4",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p136-精熟_4.jpg",
+        "solutionCrop": "crops/jh2_4-p136-精熟_4_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p136-精熟_5",
+        "page": 136,
+        "label": "2-4 精熟 5",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p136-精熟_5.jpg",
+        "solutionCrop": "crops/jh2_4-p136-精熟_5_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p136-素養_6",
+        "page": 136,
+        "label": "2-4 素養 6",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p136-素養_6.jpg",
+        "solutionCrop": "crops/jh2_4-p136-素養_6_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p136-素養_7",
+        "page": 136,
+        "label": "2-4 素養 7",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p136-素養_7.jpg",
+        "solutionCrop": "crops/jh2_4-p136-素養_7_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p137-歷屆_1",
+        "page": 137,
+        "label": "2-4 歷屆 1",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p137-歷屆_1.jpg",
+        "solutionCrop": "crops/jh2_4-p137-歷屆_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p137-歷屆_2",
+        "page": 137,
+        "label": "2-4 歷屆 2",
+        "answer": "(D)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p137-歷屆_2.jpg",
+        "solutionCrop": "crops/jh2_4-p137-歷屆_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p137-歷屆_3",
+        "page": 137,
+        "label": "2-4 歷屆 3",
+        "answer": "(D)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p137-歷屆_3.jpg",
+        "solutionCrop": "crops/jh2_4-p137-歷屆_3_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p137-歷屆_4",
+        "page": 137,
+        "label": "2-4 歷屆 4",
+        "answer": "(B)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p137-歷屆_4.jpg",
+        "solutionCrop": "crops/jh2_4-p137-歷屆_4_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p137-歷屆_5",
+        "page": 137,
+        "label": "2-4 歷屆 5",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p137-歷屆_5.jpg",
+        "solutionCrop": "crops/jh2_4-p137-歷屆_5_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p137-歷屆_6",
+        "page": 137,
+        "label": "2-4 歷屆 6",
+        "answer": "(C)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p137-歷屆_6.jpg",
+        "solutionCrop": "crops/jh2_4-p137-歷屆_6_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p137-歷屆_7",
+        "page": 137,
+        "label": "2-4 歷屆 7",
+        "answer": "(A)",
+        "type": "choice",
+        "studentCrop": "crops/jh2_4-p137-歷屆_7.jpg",
+        "solutionCrop": "crops/jh2_4-p137-歷屆_7_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p138-非選_1",
+        "page": 138,
+        "label": "2-4 非選 1",
+        "answer": "(1) 12.5%；(2) 是",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p138-非選_1.jpg",
+        "solutionCrop": "crops/jh2_4-p138-非選_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p138-非選_2",
+        "page": 138,
+        "label": "2-4 非選 2",
+        "answer": "(1) 12；(2) 不足夠",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p138-非選_2.jpg",
+        "solutionCrop": "crops/jh2_4-p138-非選_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p139-資優_1",
+        "page": 139,
+        "label": "2-4 資優 1",
+        "answer": "(1) 19/36；(2) 19/4",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p139-資優_1.jpg",
+        "solutionCrop": "crops/jh2_4-p139-資優_1_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p139-資優_2",
+        "page": 139,
+        "label": "2-4 資優 2",
+        "answer": "-1/4",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p139-資優_2.jpg",
+        "solutionCrop": "crops/jh2_4-p139-資優_2_sol.jpg"
+      },
+      {
+        "id": "jh2_4-p139-資優_3",
+        "page": 139,
+        "label": "2-4 資優 3",
+        "answer": "7",
+        "type": "fill",
+        "studentCrop": "crops/jh2_4-p139-資優_3.jpg",
+        "solutionCrop": "crops/jh2_4-p139-資優_3_sol.jpg"
       }
     ]
   }

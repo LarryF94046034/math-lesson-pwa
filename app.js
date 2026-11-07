@@ -129,7 +129,7 @@ function renderLogin(message = "") {
       <div class="muted" id="auth-msg">${message}</div>
     </form>
     <p class="muted">只有已開放的電子郵件可以註冊或登入。密碼至少 6 個字元。</p>
-    <p class="muted">版號 v30</p>
+    <p class="muted">版號 v31</p>
   </div>`;
   const form = document.getElementById("auth-form");
   const emailEl = document.getElementById("auth-email");
@@ -402,6 +402,14 @@ function pageSectionTitle(zoneId, page) {
     if (page >= 126 && page <= 127) return `第 ${page} 頁｜2-3 試題搶先做 — 三、優良經典題（歷屆會考・附高解析詳解）`;
     if (page === 128) return `第 128 頁｜會考非選精熟試題`;
     if (page === 129) return `第 129 頁｜資優挑戰題`;
+  }
+  if (zoneId === "jh2_4") {
+    if (page >= 130 && page <= 133) return `第 ${page} 頁｜重點範例・演練・繼續來挑戰`;
+    if (page >= 134 && page <= 135) return `第 ${page} 頁｜2-4 試題搶先做 — 一、基礎題（附詳解與速解觀點）`;
+    if (page === 136) return `第 136 頁｜2-4 試題搶先做 — 二、精熟題與素養題組`;
+    if (page === 137) return `第 137 頁｜2-4 試題搶先做 — 三、優良經典題（歷屆會考・附高解析詳解）`;
+    if (page === 138) return `第 138 頁｜會考非選精熟試題`;
+    if (page === 139) return `第 139 頁｜資優挑戰題`;
   }
   return `第 ${page} 頁`;
 }
