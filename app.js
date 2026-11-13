@@ -129,7 +129,7 @@ function renderLogin(message = "") {
       <div class="muted" id="auth-msg">${message}</div>
     </form>
     <p class="muted">只有已開放的電子郵件可以註冊或登入。密碼至少 6 個字元。</p>
-    <p class="muted">版號 v33</p>
+    <p class="muted">版號 v34</p>
   </div>`;
   const form = document.getElementById("auth-form");
   const emailEl = document.getElementById("auth-email");
@@ -1070,10 +1070,12 @@ async function openBoard(zoneId, index, practice, mentor = false, solutionMode =
 
   async function loadImage(q) {
     const img = new Image();
-    const src = asset(q.image);
+    const imagePath = q.image || q.studentCrop || "";
+    const src = asset(imagePath);
     img.src = src;
     await img.decode();
-    const isCleanStudentCrop = Boolean(q.solutionImage) || q.zone === "jh1_1";
+    const solutionPath = q.solutionImage || q.solutionCrop || "";
+    const isCleanStudentCrop = Boolean(solutionPath) || q.zone === "jh1_1";
     if (!mentor && !solutionMode && practice && !reveal && !isCleanStudentCrop) {
       await zoom.setSrc(coverCanvas(img));
     } else {
@@ -1081,8 +1083,8 @@ async function openBoard(zoneId, index, practice, mentor = false, solutionMode =
     }
 
     if (solutionMode && solZoom) {
-      if (q.solutionImage) {
-        await solZoom.setSrc(asset(q.solutionImage));
+      if (solutionPath) {
+        await solZoom.setSrc(asset(solutionPath));
       } else {
         await solZoom.setSrc(makeFallbackSolutionDataUrl(q));
       }

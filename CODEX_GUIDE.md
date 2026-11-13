@@ -197,13 +197,18 @@ def extract_chapter_pages(pdf_path, page_start, page_end, prefix):
   "questionCount": 51
 }
 ```
-2. 在 `questions["jh2_4"]` 陣列中加入所有題目清單：
+2. 在 `questions["jh2_4"]` 陣列中加入所有題目清單（**注意：圖片路徑欄位名稱必須是 `image` 與 `solutionImage`，不可寫成 `studentCrop`/`solutionCrop`，否則前端無法載入題目圖**）：
 ```json
 {
   "id": "jh2_4-p130-範例_1",
+  "zone": "jh2_4",
+  "asset": "1上國中講義數學測驗卷.pdf",
   "page": 130,
   "label": "2-4 範例 1",
-  "answer": "-125/64（-1.953125）"
+  "kind": "fill",
+  "answer": "-125/64（-1.953125）",
+  "image": "crops/jh2_4-p130-範例_1.jpg",
+  "solutionImage": "crops/jh2_4-p130-範例_1_sol.jpg"
 }
 ```
 

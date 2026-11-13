@@ -123,10 +123,15 @@ for idx, q in enumerate(all_definitions):
     
     questions_2_4.append({
         "id": qid,
+        "zone": "jh2_4",
+        "asset": "1上國中講義數學測驗卷.pdf",
         "page": page,
         "label": q["label"],
         "answer": ans,
         "type": qtype,
+        "kind": qtype,
+        "image": f"crops/{qid}.jpg",
+        "solutionImage": f"crops/{qid}_sol.jpg",
         "studentCrop": f"crops/{qid}.jpg",
         "solutionCrop": f"crops/{qid}_sol.jpg"
     })
