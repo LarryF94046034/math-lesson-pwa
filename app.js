@@ -129,7 +129,7 @@ function renderLogin(message = "") {
       <div class="muted" id="auth-msg">${message}</div>
     </form>
     <p class="muted">只有已開放的電子郵件可以註冊或登入。密碼至少 6 個字元。</p>
-    <p class="muted">版號 v31</p>
+    <p class="muted">版號 v33</p>
   </div>`;
   const form = document.getElementById("auth-form");
   const emailEl = document.getElementById("auth-email");
