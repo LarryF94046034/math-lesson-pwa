@@ -188,15 +188,16 @@ def append_advanced_card(crop_img, other_jh_steps, advanced_steps, dest_path):
         adv_card_h = 40 + len(wrapped_adv) * line_h + 15
         extra_h += adv_card_h + 15
         
-    tot_h = ch + extra_h
+    top_padding = 8
+    tot_h = ch + extra_h + top_padding
     im = Image.new("RGB", (card_w, tot_h), (255, 255, 255))
     draw = ImageDraw.Draw(im)
     
     # Paste base crop
     x_offset = (card_w - cw) // 2
-    im.paste(crop_img, (x_offset, 0))
+    im.paste(crop_img, (x_offset, top_padding))
     
-    curr_y = ch + 10
+    curr_y = ch + top_padding + 10
     if wrapped_other:
         draw.rounded_rectangle([15, curr_y, card_w - 15, curr_y + other_card_h], radius=10, fill="#eafaf1", outline="#1e7a46", width=2)
         draw.text((28, curr_y + 8), "★【國中其他解法／另解與速解技巧】", fill="#145a32", font=font_bold)
